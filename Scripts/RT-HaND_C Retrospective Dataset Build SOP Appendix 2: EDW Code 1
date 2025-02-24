@@ -1,0 +1,706 @@
+--RT-HaND_C Retrospective Dataset Build SOP Appendix 2: EDW Code 
+--Code as of 11/11/2024. Memory on SSMS not sufficient for 1 code, therefore split into 3 codes and then amalgamated:
+
+--Part 1: 
+
+SELECT cohort.[HospitalID]
+	  ,ariaids.ARIA_ID
+      ,cohort.[NHSNumber]
+      ,cohort.[SurNM]
+      ,cohort.[ForeNM]
+      ,cohort.[DOB]
+      ,cohort.[Gender]
+      ,cohort.[Ethnicity]
+      ,address.PostalCD
+	  ,address.Address
+	  ,cogstack.[Hypertension]
+      ,cogstack.[Heart_disease]
+      ,cogstack.[Chronic_resp_disease]
+      ,cogstack.[Chronic_liver_disease]
+      ,cogstack.[Chronic_kidney_disease]
+      ,cogstack.[Diabetes_mellitus]
+      ,cogstack.[Atrial_fibrillation]
+	  ,otherca.[NonHNCCancerDx1]
+      ,otherca.[NonHNCCancerDx2]
+	  ,height.Height_cm
+	  ,weight.First_recorded_weight_kg
+	  ,weight.ObservationDTS AS Date_weight_recorded
+	  ,ecogps.[ECOG_Performance_Status_ObservationDTS]
+	  ,ecogps.[First_recorded_ECOG_Performance_Status]
+	  ,alcostatus.[Alcohol_Observation_DTS]
+      ,alcostatus.[Alcohol_Observation_Choice_ShortNM]
+	  ,alcoamount.[Alcohol_Amount_ObservationDTS]
+      ,alcoamount.[Alcohol_Amount_ObservationChoiceShortNM]
+	  ,smokestatus.[Smoking_observation_date]
+      ,smokestatus.[First_recorded_Smoking_status]
+	  ,smokeamount.Smoking_Amount_ObservationDTS
+      ,smokeamount.Smoking_Amount_ObservationChoiceShortNM
+	  ,diaghisto.[Diagnosis_Date_Mosaiq]
+      ,diaghisto.[Decision_to_treat_date_Mosaiq]
+	  ,hnlist.[Onc_first_visit]
+	  ,diaghisto2.[Disease_major_site_HNlist]
+      ,diaghisto.[Disease_Site_Mosaiq]
+      ,diaghisto2.[Multiple_Sites_Details]
+	  ,diaghisto.Disease_subsite
+      ,diaghisto.[Disease_laterality_Mosaiq]
+      ,diaghisto2.cT_stage_Mosaiq_TNM7
+	  ,diaghisto2.cN_stage_Mosaiq_TNM7
+	  ,diaghisto2.cM_stage_Mosaiq_TNM7
+	  ,diaghisto2.cDisease_Stage_TNM7
+      ,diaghisto.pT_stage_Mosaiq_TNM7
+	  ,diaghisto.pN_stage_Mosaiq_TNM7
+	  ,diaghisto.pDisease_Stage_TNM7
+	  ,diaghisto.cT_stage_Mosaiq_TNM8
+	  ,diaghisto.cN_stage_Mosaiq_TNM8
+	  ,diaghisto.cM_stage_Mosaiq_TNM8
+	  ,diaghisto.cDisease_Stage_TNM8
+      ,diaghisto.pT_stage_Mosaiq_TNM8
+	  ,diaghisto.pN_stage_Mosaiq_TNM8
+	  ,diaghisto.pDisease_Stage_TNM8
+      ,diaghisto2.[Lung_mets_at_Dx]
+      ,diaghisto2.[Brain_mets_at_Dx]
+      ,diaghisto2.[Liver_mets_at_Dx]
+      ,diaghisto2.[Bone_mets_at_Dx]
+	  ,hnlist.[Histopathology]
+      ,diaghisto.[Histology_Code_Mosaiq]
+      ,diaghisto.[HistopathNM_Mosaiq]
+      ,diaghisto.[Histopath_Date]
+      ,diaghisto.[Tumour_Grade_Mosaiq]
+      ,diaghisto.[HPV_Status_CogStack]
+      ,diaghisto.[HPV_p16]
+      ,diaghisto.[HPV_ISH]
+      ,diaghisto.EBV_Status
+      ,diaghisto.[LVI] AS GT_LVI
+	  ,diaghisto2.[Perineural_invasion_Combined_GT_and_Cogstack_data]
+      ,othercogstack.Perineural_invasion_present_CogStack
+	  ,diaghisto.PNI AS GT_PNI
+      ,diaghisto.[Surgical_margin]
+      ,diaghisto.[Depth_of_invasion]
+	  ,diaghisto.ECS AS GT_ECS
+      ,diaghisto.PDL1_score_TPS
+      ,diaghisto.PDL1_TPS_category
+      ,diaghisto.PDL1_score_CPS
+      ,diaghisto.PDL1_CPS_category
+	  ,firstrx.Initial_treatment_received
+      ,hnlist.[HN_list_clin_info]
+	  ,mdm.[HN_MDM_Date]
+      ,mdm.[MDM_Outcome_1]
+      ,mdm.[MDM_Outcome_2]
+      ,mdm.[Treatment_Intent]
+      ,mdm.[Treatment_Plan]
+      ,mdm.[Other_Treatment_Plan]
+      ,mdm.[HN_MDM_Date_2]
+      ,mdm.[MDM_Outcome_1_2]
+      ,mdm.[MDM_Outcome_2_2]
+      ,mdm.[Treatment_Intent_2]
+      ,mdm.[Treatment_Plan_2]
+      ,mdm.[Other_Treatment_Plan_2]
+	  ,mdm.[HN_MDM_Date_3]
+      ,mdm.[MDM_Outcome_1_3]
+      ,mdm.[MDM_Outcome_2_3]
+      ,mdm.[Treatment_Intent_3]
+      ,mdm.[Treatment_Plan_3]
+      ,mdm.[Other_Treatment_Plan_3]
+      ,mdm.[HN_MDM_Date_4]
+      ,mdm.[MDM_Outcome_1_4]
+      ,mdm.[MDM_Outcome_2_4]
+      ,mdm.[Treatment_Intent_4]
+      ,mdm.[Treatment_Plan_4]
+      ,mdm.[Other_Treatment_Plan_4]
+      ,mdm.[HN_MDM_Date_5]
+      ,mdm.[MDM_Outcome_1_5]
+      ,mdm.[MDM_Outcome_2_5]
+      ,mdm.[Treatment_Intent_5]
+      ,mdm.[Treatment_Plan_5]
+      ,mdm.[Other_Treatment_Plan_5]
+      ,mdm.[HN_MDM_Date_6]
+      ,mdm.[MDM_Outcome_1_6]
+      ,mdm.[MDM_Outcome_2_6]
+      ,mdm.[Treatment_Intent_6]
+      ,mdm.[Treatment_Plan_6]
+      ,mdm.[Other_Treatment_Plan_6]
+      ,mdm.[HN_MDM_Date_7]
+      ,mdm.[MDM_Outcome_1_7]
+      ,mdm.[MDM_Outcome_2_7]
+      ,mdm.[Treatment_Intent_7]
+      ,mdm.[Treatment_Plan_7]
+      ,mdm.[Other_Treatment_Plan_7]
+      ,mdm.[HN_MDM_Date_8]
+      ,mdm.[MDM_Outcome_1_8]
+      ,mdm.[MDM_Outcome_2_8]
+      ,mdm.[Treatment_Intent_8]
+      ,mdm.[Treatment_Plan_8]
+      ,mdm.[Other_Treatment_Plan_8]
+      ,mdm.[HN_MDM_Date_9]
+      ,mdm.[MDM_Outcome_1_9]
+      ,mdm.[MDM_Outcome_2_9]
+      ,mdm.[Treatment_Intent_9]
+      ,mdm.[Treatment_Plan_9]
+      ,mdm.[Other_Treatment_Plan_9]
+      ,mdm.[HN_MDM_Date_10]
+      ,mdm.[MDM_Outcome_1_10]
+      ,mdm.[MDM_Outcome_2_10]
+      ,mdm.[Treatment_Intent_10]
+      ,mdm.[Treatment_Plan_10]
+      ,mdm.[Other_Treatment_Plan_10]
+      ,mdm.[HN_MDM_Date_11]
+      ,mdm.[MDM_Outcome_1_11]
+      ,mdm.[MDM_Outcome_2_11]
+      ,mdm.[Treatment_Intent_11]
+      ,mdm.[Treatment_Plan_11]
+      ,mdm.[Other_Treatment_Plan_11]
+      ,mdm.[HN_MDM_Date_12]
+      ,mdm.[MDM_Outcome_1_12]
+      ,mdm.[MDM_Outcome_2_12]
+      ,mdm.[Treatment_Intent_12]
+      ,mdm.[Treatment_Plan_12]
+      ,mdm.[Other_Treatment_Plan_12]
+      ,mdm.[HN_MDM_Date_13]
+      ,mdm.[MDM_Outcome_1_13]
+      ,mdm.[MDM_Outcome_2_13]
+      ,mdm.[Treatment_Intent_13]
+      ,mdm.[Treatment_Plan_13]
+      ,mdm.[Other_Treatment_Plan_13]
+      ,mdm.[HN_MDM_Date_14]
+      ,mdm.[MDM_Outcome_1_14]
+      ,mdm.[MDM_Outcome_2_14]
+      ,mdm.[Treatment_Intent_14]
+      ,mdm.[Treatment_Plan_14]
+      ,mdm.[Other_Treatment_Plan_14]
+      ,mdm.[HN_MDM_Date_15]
+      ,mdm.[MDM_Outcome_1_15]
+      ,mdm.[MDM_Outcome_2_15]
+      ,mdm.[Treatment_Intent_15]
+      ,mdm.[Treatment_Plan_15]
+      ,mdm.[Other_Treatment_Plan_15]
+      ,mdm.[HN_MDM_Date_16]
+      ,mdm.[MDM_Outcome_1_16]
+      ,mdm.[MDM_Outcome_2_16]
+      ,mdm.[Treatment_Intent_16]
+      ,mdm.[Treatment_Plan_16]
+      ,mdm.[Other_Treatment_Plan_16]
+      ,mdm.[HN_MDM_Date_17]
+      ,mdm.[MDM_Outcome_1_17]
+      ,mdm.[MDM_Outcome_2_17]
+      ,mdm.[Treatment_Intent_17]
+      ,mdm.[Treatment_Plan_17]
+      ,mdm.[Other_Treatment_Plan_17]
+      ,mdm.[HN_MDM_Date_18]
+      ,mdm.[MDM_Outcome_1_18]
+      ,mdm.[MDM_Outcome_2_18]
+      ,mdm.[Treatment_Intent_18]
+      ,mdm.[Treatment_Plan_18]
+      ,mdm.[Other_Treatment_Plan_18]
+      ,mdm.[HN_MDM_Date_19]
+      ,mdm.[MDM_Outcome_1_19]
+      ,mdm.[MDM_Outcome_2_19]
+      ,mdm.[Treatment_Intent_19]
+      ,mdm.[Treatment_Plan_19]
+      ,mdm.[Other_Treatment_Plan_19]
+      ,mdm.[HN_MDM_Date_20]
+      ,mdm.[MDM_Outcome_1_20]
+      ,mdm.[MDM_Outcome_2_20]
+      ,mdm.[Treatment_Intent_20]
+      ,mdm.[Treatment_Plan_20]
+      ,mdm.[Other_Treatment_Plan_20]
+      ,mdm.[HN_MDM_Date_21]
+      ,mdm.[MDM_Outcome_1_21]
+      ,mdm.[MDM_Outcome_2_21]
+      ,mdm.[Treatment_Intent_21]
+      ,mdm.[Treatment_Plan_21]
+      ,mdm.[Other_Treatment_Plan_21]
+      ,mdm.[HN_MDM_Date_22]
+      ,mdm.[MDM_Outcome_1_22]
+      ,mdm.[MDM_Outcome_2_22]
+      ,mdm.[Treatment_Intent_22]
+      ,mdm.[Treatment_Plan_22]
+      ,mdm.[Other_Treatment_Plan_22]
+      ,mdm.[HN_MDM_Date_23]
+      ,mdm.[MDM_Outcome_1_23]
+      ,mdm.[MDM_Outcome_2_23]
+      ,mdm.[Treatment_Intent_23]
+      ,mdm.[Treatment_Plan_23]
+      ,mdm.[Other_Treatment_Plan_23]
+      ,mdm.[HN_MDM_Date_24]
+      ,mdm.[MDM_Outcome_1_24]
+      ,mdm.[MDM_Outcome_2_24]
+      ,mdm.[Treatment_Intent_24]
+      ,mdm.[Treatment_Plan_24]
+      ,mdm.[Other_Treatment_Plan_24]
+      ,mdm.[HN_MDM_Date_25]
+      ,mdm.[MDM_Outcome_1_25]
+      ,mdm.[MDM_Outcome_2_25]
+      ,mdm.[Treatment_Intent_25]
+      ,mdm.[Treatment_Plan_25]
+      ,mdm.[Other_Treatment_Plan_25]
+	  ,procedures.Laryngectomy
+	  ,procedures.Laryngectomy_ProcedureDSC
+	  ,procedures.Laryngectomy_ProcedureDTS
+	  ,othercogstack.Laryngectomy_CogStack
+	  ,procedures.Neck_dissection
+	  ,procedures.Neck_dissection_ProcedureDSC
+	  ,procedures.Neck_dissection_ProcedureDTS
+	  ,othercogstack.Block_dissection_of_cervical_lymph_nodes_CogStack
+	  ,procedures.Tracheostomy
+	  ,procedures.Tracheostomy_Procedure_description
+	  ,procedures.Tracheostomy_First_Procedure_Date
+      ,othercogstack.Tracheostomy_CogStack
+	  ,procedures.Mandible_excision
+	  ,procedures.Mandible_excision_ProcedureDSC
+	  ,procedures.Mandible_excision_ProcedureDTS
+	  ,othercogstack.Excision_of_mandible_CogStack
+	  ,procedures.Maxillectomy
+	  ,procedures.Maxillectomy_ProcedureDSC
+	  ,procedures.Maxillectomy_ProcedureDTS
+	  ,othercogstack.Maxillectomy_CogStack
+	  ,procedures.Total_Glossectomy
+	  ,procedures.Total_Glossectomy_ProcedureDSC
+	  ,procedures.Total_Glossectomy_ProcedureDTS
+	  ,othercogstack.Total_glossectomy_CogStack
+	  ,procedures.Partial_Glossectomy
+	  ,procedures.Partial_Glossectomy_ProcedureDSC
+	  ,procedures.Partial_Glossectomy_ProcedureDTS
+	  ,othercogstack.Partial_glossectomy_CogStack
+	  ,procedures.Oral_cavity_surgery
+	  ,procedures.Oral_cavity_surgery_ProcedureDSC
+	  ,procedures.Oral_cavity_surgery_ProcedureDTS
+	  ,othercogstack.[Wide_ excision_CogStack]
+	  ,procedures.Tonsillectomy
+	  ,procedures.Tonsillectomy_ProcedureDSC
+	  ,procedures.Tonsillectomy_ProcedureDTS
+	  ,othercogstack.Tonsillectomy_CogStack
+	  ,procedures.Pharyngectomy
+	  ,procedures.Pharyngectomy_ProcedureDSC
+	  ,procedures.Pharyngectomy_ProcedureDTS
+	  ,othercogstack.Pharyngectomy_CogStack
+	  ,procedures.Salivary_gland_surgery
+	  ,procedures.Salivary_gland_surgery_procedure_description
+	  ,procedures.Salivary_gland_surgery_First_procedure_date
+	  ,procedures.Nasal_cavity_sinus_surgery
+	  ,procedures.Nasal_cavity_sinus_surgery_ProcedureDSC
+	  ,procedures.Nasal_cavity_sinus_surgery_ProcedureDTS
+	  ,procedures.Orbital_Exenteration
+	  ,procedures.Orbital_Exenteration_Procedure_Description
+	  ,procedures.Orbital_Exenteration_ProcedureDTS
+	  ,othercogstack.Salvage_procedure_CogStack
+	  ,procedures.Electrochemotherapy
+	  ,procedures.Electrochemotherapy_procedure_description
+	  ,procedures.Electrochemotherapy_first_procedure_date
+	  ,procedures.Gastrostomy
+	  ,procedures.Gastrostomy_procedure_description
+	  ,procedures.Gastrostomy_date
+	  ,procedures.Gastrostomy_removal
+	  ,procedures.Gastrostomy_removal_ProcedureDSC
+	  ,procedures.Gastrostomy_removal_First_Procedure_Date
+	  ,procedures.[Surgical Removal of Tooth NEC]
+      ,procedures.[Surgical Removal of Tooth NEC_date]
+      ,procedures.[Surgical Removal of Tooth NEC_2]
+      ,procedures.[Surgical Removal of Tooth NEC_date_2]
+      ,procedures.[Surgical Removal of Wisdom Tooth NEC]
+      ,procedures.[Surgical Removal of Wisdom Tooth NEC_date]
+      ,procedures.[Surgical Removal of Wisdom Tooth NEC_2]
+      ,procedures.[Surgical Removal of Wisdom Tooth NEC_date_2]
+      ,procedures.[Extraction of Multiple Teeth NEC]
+      ,procedures.[Extraction of Multiple Teeth NEC_date]
+      ,procedures.[Extraction of Multiple Teeth NEC_2]
+      ,procedures.[Extraction of Multiple Teeth NEC_date_2]
+      ,procedures.[Extraction of Multiple Teeth NEC_3]
+      ,procedures.[Extraction of Multiple Teeth NEC_date_3]
+      ,procedures.[Surgical Removal of Retained Root of Tooth]
+      ,procedures.[Surgical Removal of Retained Root of Tooth_date]
+      ,procedures.[Full Dental Clearance]
+      ,procedures.[Full Dental Clearance_date]
+      ,procedures.[Lower Dental Clearance]
+      ,procedures.[Lower Dental Clearance_date]
+      ,procedures.[Upper Dental Clearance]
+      ,procedures.[Upper Dental Clearance_date]
+      ,procedures.[Surgical Removal of Impacted Wisdom Tooth]
+      ,procedures.[Surgical Removal of Impacted Wisdom Tooth_date]
+      ,procedures.[Surgical Removal of Impacted Wisdom Tooth_2]
+      ,procedures.[Surgical Removal of Impacted Wisdom Tooth_2_date]
+      ,procedures.[Unspecified surgical removal of tooth]
+      ,procedures.[Unspecified surgical removal of tooth_date]
+      ,procedures.[Unspecified simple extraction of tooth]
+      ,procedures.[Unspecified simple extraction of tooth_date]
+      ,procedures.[Other specified simple extraction of tooth]
+      ,procedures.[Other specified simple extraction of tooth_date]
+      ,procedures.[Surgical Removal of Impacted Tooth NEC]
+      ,procedures.[Surgical Removal of Impacted Tooth NEC_date]
+	  ,hnrxintent.ObservationDTS AS HN_form_first_treatment_intent_date
+	  ,hnrxintent.ObservationChoiceShortNM AS HN_form_first_treatment_intent
+	  ,hnrxplan.ObservationDTS AS HN_form_first_treatment_plan_date
+	  ,hnrxplan.ObservationChoiceShortNM AS HN_form_first_treatment_plan
+	  ,bsa.BsaNBR
+	  ,bsa.EditDTS
+      ,chemodata.[NACT_DiagnosisDescription]
+      ,chemodata.[NACT_DiagnosisCategory]
+      ,chemodata.[Neoadjuvant_chemo]
+      ,chemodata.[NACTregimen1]
+      ,chemodata.[NACT_Cycle1_date]
+      ,chemodata.[NACT_cycles]
+      ,chemodata.[Cisplatin_NACT_cycles]
+      ,chemodata.[Cisplatin_NACT_total_dose]
+      ,chemodata.[Carboplatin_NACT_cycles]
+      ,chemodata.[Carboplatin_NACT_total_dose]
+      ,chemodata.[5FU_NACT_doses]
+      ,chemodata.[5FU_NACT_total_dose]
+      ,chemodata.[Docetaxel_NACT_cycles]
+      ,chemodata.[Docetaxel_NACT_total_dose]
+      ,chemodata.[Gemcitabine_NACT_cycles]
+      ,chemodata.[Gemcitabine_NACT_total_dose]
+      ,chemodata.[NACT_regimen_2]
+      ,chemodata.[Concomitant_DiagnosisDescription]
+      ,chemodata.[Concomitant_DiagnosisCategory]
+      ,chemodata.[Concomitant_chemo]
+      ,chemodata.[Concomitant_drug1]
+      ,chemodata.[Concomitant_cycle1_date]
+      ,chemodata.[Concomitant_drug1_total_dose]
+      ,chemodata.[Concomitant_drug1_cycles]
+      ,chemodata.[Concomitant_drug_1_dosing_regimen]
+      ,chemodata.[Concomitant_drug2]
+      ,chemodata.[Concomitant_drug2_total_dose]
+      ,chemodata.[Concomitant_drug2_cycles]
+      ,chemodata.[Concomitant_drug_2_dosing_regimen]
+	  ,rttreatment.[HNCRT]
+      ,rttreatment.[HNCRT_course_1_site]
+      ,rttreatment.[HNC_RT_course_1_site_details]
+      ,rttreatment.[HNC_RT_course_1_intent]
+      ,rttreatment.[HNC_RT_course_1_category]
+      ,rttreatment.[HNC_RT_course_1_technique]
+      ,rttreatment.[HNC_RT_course_1_energy]
+      ,rttreatment.[HNC_RT_course_1_px_point]
+      ,rttreatment.[HNC_RT_course_1_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_1_recorded_total_dose]
+      ,rttreatment.[HNC_RT_course_1_recorded_fractions]
+      ,rttreatment.[HNC_RT_course_1_initially_intended_total_dose]
+      ,rttreatment.[HNC_RT_course_1 _initially_intended_fractions]
+      ,rttreatment.[HNC_RT_course_1_start_date]
+      ,rttreatment.[HNC_RT_course_1_end_date]
+      ,rttreatment.[HNC_RT_course_1_elapsed_time]
+      ,rttreatment.[HNC_RT_course_1_replans]
+      ,rttreatment.[HNC_RT_course_1_planning_MRI]
+      ,rttreatment.[HNC_RT_course_1_interruption]
+      ,rttreatment.[HNC_RT_course_1_interruption_reason]
+      ,rttreatment.[HNC_RT_course_1_early_termination]
+      ,rttreatment.[HNC_RT_course_1_early_termination_reason]
+      ,rttreatment.[HNC_RT_course_1_High_dose_volume_dose]
+      ,rttreatment.[HNC_RT_course_1_Ppx_dose_volume_dose]
+      ,rttreatment.[HNC_RT_course_1_RT_clinical_trial]
+      ,rttreatment.[HNC_RT_course_1_RT_clinical_trial_details]
+      ,rttreatment.[HNC_RT_course_1_Previous_relevant_RT]
+      ,rttreatment.[HNC_RT_course_1_Previous_relevant_RT_details]
+      ,rttreatment.[HNC_RT_course_1_pacemakerICD]
+	  ,targetvols.[HN_Site]
+      ,targetvols.[HN_Planning_System]
+      ,targetvols.[HN_Planning_CT_Date]
+      ,targetvols.[HN_Laterality]
+      ,targetvols.[PTV1_Dose]
+      ,targetvols.[PTV2_Dose]
+      ,targetvols.[PTV3_Dose]
+      ,targetvols.[Fractionation]
+      ,targetvols.[HN_GTV]
+      ,targetvols.[HN_GTV_Rt_Nodal_Levels]
+      ,targetvols.[HN_GTV_Lt_Nodal_Levels]
+      ,targetvols.[HN_CTV1_Organ_T]
+      ,targetvols.[HN_CTV1_Rt_Nodal_Levels]
+      ,targetvols.[HN_CTV1_Lt_Nodal_Levels]
+      ,targetvols.[HN_CTV2_Organ_T]
+      ,targetvols.[HN_CTV2_Rt_Nodal_Levels]
+      ,targetvols.[HN_CTV2_Lt_Nodal_Levels]
+      ,targetvols.[HN_CTV3_Tumour_Organ]
+      ,targetvols.[HN_CTV3_Rt_Nodal_Levels]
+      ,targetvols.[HN_CTV3_Lt_Nodal_Levels]
+      ,targetvols.[CTV1_to_PTV1_margin_mm]
+      ,targetvols.[HN_CTV2_to_PTV2]
+      ,targetvols.[HN_CTV3_to_PTV3]
+      ,targetvols.[HN_GTVT_Vol]
+      ,targetvols.[HN_GTVN_Vol]
+      ,targetvols.[HN_CTV1_Radical_Vol]
+      ,targetvols.[HN_CTV2_Elective_Vol]
+      ,targetvols.[HN_CTV3_Other_Vol]
+      ,targetvols.[HN_PTV1_Radical_Vol]
+      ,targetvols.[HN_PTV2_Elective_Vol]
+      ,targetvols.[HN_PTV3_Other_Vol]
+      ,targetvols.[HN_Spinal_Cord_Vol]
+      ,targetvols.[HN_Brainstem_Vol]
+      ,targetvols.[HN_Parotid_Rt_Vol]
+      ,targetvols.[HN_Parotid_Lt_Vol]
+      ,targetvols.[HN_OpticNerve_Rt_Vol]
+      ,targetvols.[HN_OpticNerve_Lt_Vol]
+      ,targetvols.[HN_Optic_Chiasm_Vol]
+      ,targetvols.[HN_Lens_Rt_Vol]
+      ,targetvols.[HN_Lens_Lt_Vol]
+      ,targetvols.[HN_Retina_Rt_Vol]
+      ,targetvols.[HN_Retina_Lt_Vol]
+      ,targetvols.[HN_Pituitary_Vol]
+      ,targetvols.[HN_Cochlea_Rt_Vol]
+      ,targetvols.[HN_Cochlea_Lt_Vol]
+      ,targetvols.[HN_Accepted_Deviation]
+      ,targetvols.[HN_Vols_Completed]
+      ,targetvols.[Assessment_Date]
+      ,rttreatment.[HNCRT_course_2_site]
+      ,rttreatment.[HNC_RT_course_2_intent]
+      ,rttreatment.[HNC_RT_course_2_category]
+      ,rttreatment.[HNC_RT_course_2_technique]
+      ,rttreatment.[HNC_RT_course_2_energy]
+      ,rttreatment.[HNC_RT_course_2_px_point]
+      ,rttreatment.[HNC_RT_course_2_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_2_total_dose]
+      ,rttreatment.[HNC_RT_course_2_fractions]
+      ,rttreatment.[HNC_RT_course_2_start_date]
+      ,rttreatment.[HNC_RT_course_2_end_date]
+      ,rttreatment.[HNC_RT_course_2_elapsed_time]
+      ,rttreatment.[HNC_RT_course_2_replans]
+      ,rttreatment.[HNCRT_course_3_site]
+      ,rttreatment.[HNC_RT_course_3_intent]
+      ,rttreatment.[HNC_RT_course_3_category]
+      ,rttreatment.[HNC_RT_course_3_technique]
+      ,rttreatment.[HNC_RT_course_3_energy]
+      ,rttreatment.[HNC_RT_course_3_px_point]
+      ,rttreatment.[HNC_RT_course_3_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_3_total_dose]
+      ,rttreatment.[HNC_RT_course_3_fractions]
+      ,rttreatment.[HNC_RT_course_3_start_date]
+      ,rttreatment.[HNC_RT_course_3_end_date]
+      ,rttreatment.[HNC_RT_course_3_elapsed_time]
+      ,rttreatment.[HNC_RT_course_3_replans]
+      ,rttreatment.[HNCRT_course_4_site]
+	  ,rttreatment.[HNC_RT_course_4_intent]
+      ,rttreatment.[HNC_RT_course_4_category]
+      ,rttreatment.[HNC_RT_course_4_technique]
+      ,rttreatment.[HNC_RT_course_4_energy]
+      ,rttreatment.[HNC_RT_course_4_px_point]
+      ,rttreatment.[HNC_RT_course_4_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_4_total_dose]
+      ,rttreatment.[HNC_RT_course_4_fractions]
+      ,rttreatment.[HNC_RT_course_4_start_date]
+      ,rttreatment.[HNC_RT_course_4_end_date]
+      ,rttreatment.[HNC_RT_course_4_elapsed_time]
+      ,rttreatment.[HNC_RT_course_4_replans]
+      ,rttreatment.[HNCRT_course_5_site]
+      ,rttreatment.[HNC_RT_course_5_intent]
+      ,rttreatment.[HNC_RT_course_5_category]
+      ,rttreatment.[HNC_RT_course_5_technique]
+      ,rttreatment.[HNC_RT_course_5_energy]
+      ,rttreatment.[HNC_RT_course_5_px_point]
+      ,rttreatment.[HNC_RT_course_5_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_5_total_dose]
+      ,rttreatment.[HNC_RT_course_5_fractions]
+      ,rttreatment.[HNC_RT_course_5_start_date]
+      ,rttreatment.[HNC_RT_course_5_end_date]
+      ,rttreatment.[HNC_RT_course_5_elapsed_time]
+      ,rttreatment.[HNC_RT_course_5_replans]
+      ,rttreatment.[HNCRT_course_6_site]
+      ,rttreatment.[HNC_RT_course_6_intent]
+      ,rttreatment.[HNC_RT_course_6_category]
+      ,rttreatment.[HNC_RT_course_6_technique]
+      ,rttreatment.[HNC_RT_course_6_energy]
+      ,rttreatment.[HNC_RT_course_6_px_point]
+      ,rttreatment.[HNC_RT_course_6_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_6_total_dose]
+      ,rttreatment.[HNC_RT_course_6_fractions]
+      ,rttreatment.[HNC_RT_course_6_start_date]
+      ,rttreatment.[HNC_RT_course_6_end_date]
+      ,rttreatment.[HNC_RT_course_6_elapsed_time]
+      ,rttreatment.[HNC_RT_course_6_replans]
+      ,rttreatment.[HNCRT_course_7_site]
+      ,rttreatment.[HNC_RT_course_7_intent]
+      ,rttreatment.[HNC_RT_course_7_category]
+      ,rttreatment.[HNC_RT_course_7_technique]
+      ,rttreatment.[HNC_RT_course_7_energy]
+      ,rttreatment.[HNC_RT_course_7_px_point]
+      ,rttreatment.[HNC_RT_course_7_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_7_total_dose]
+      ,rttreatment.[HNC_RT_course_7_fractions]
+      ,rttreatment.[HNC_RT_course_7_start_date]
+      ,rttreatment.[HNC_RT_course_7_end_date]
+      ,rttreatment.[HNC_RT_course_7_elapsed_time]
+      ,rttreatment.[HNC_RT_course_7_replans]
+      ,rttreatment.[HNCRT_course_8_site]
+      ,rttreatment.[HNC_RT_course_8_intent]
+      ,rttreatment.[HNC_RT_course_8_category]
+      ,rttreatment.[HNC_RT_course_8_technique]
+      ,rttreatment.[HNC_RT_course_8_energy]
+      ,rttreatment.[HNC_RT_course_8_px_point]
+      ,rttreatment.[HNC_RT_course_8_dose_per_Fr]
+      ,rttreatment.[HNC_RT_course_8_total_dose]
+      ,rttreatment.[HNC_RT_course_8_fractions]
+      ,rttreatment.[HNC_RT_course_8_start_date]
+      ,rttreatment.[HNC_RT_course_8_end_date]
+      ,rttreatment.[HNC_RT_course_8_elapsed_time]
+      ,rttreatment.[HNC_RT_course_8_replans]
+      ,rttreatment.[NonHNC_RT]
+      ,rttreatment.[NonHN_ RT_course_1_site]
+      ,rttreatment.[NonHNC_RT_course_1_intent]
+      ,rttreatment.[NonHNC_RT_course_1_category]
+      ,rttreatment.[NonHNC_RT_course_1_technique]
+      ,rttreatment.[NonHNC_RT_course_1_energy]
+      ,rttreatment.[NonHNC_RT_course_1_px_point]
+      ,rttreatment.[NonHNC_RT_course_1_dose_per_Fr]
+      ,rttreatment.[NonHNC_RT_course_1_total_dose]
+      ,rttreatment.[NonHNC_RT_course_1 _fractions]
+      ,rttreatment.[NonHNC_RT_course_1_start_date]
+      ,rttreatment.[NonHNC_RT_course_1_end_date]
+      ,rttreatment.[NonHNC_RT_course_1_elapsed_time]
+      ,rttreatment.[NonHNC_RT_course_2_site]
+      ,rttreatment.[NonHNC_RT_course_2_intent]
+      ,rttreatment.[NonHNC_RT_course_2_category]
+      ,rttreatment.[NonHNC_RT_course_2_technique]
+      ,rttreatment.[NonHNC_RT_course_2_energy]
+      ,rttreatment.[NonHNC_RT_course_2_px_point]
+      ,rttreatment.[NonHNC_RT_course_2_dose_per_Fr]
+      ,rttreatment.[NonHNC_RT_course_2_total_dose]
+      ,rttreatment.[NonHNC_RT_course_2_fractions]
+      ,rttreatment.[NonHNC_RT_course_2_start_date]
+      ,rttreatment.[NonHNC_RT_course_2_end_date]
+      ,rttreatment.[NonHNC_RT_course_2_elapsed_time]
+	  ,chemodata.[HN_Palliative_SACT]
+      ,chemodata.[HN_1st_line_pall_SACT_regime]
+      ,chemodata.[HN_1st_line_pall_SACT_start_date]
+      ,chemodata.[HN_1st_line_pall_SACT_number_cycles]
+      ,chemodata.[HN_2nd_line_pall_SACT_regime]
+      ,chemodata.[HN_2nd_line_pall_SACT_start_date]
+      ,chemodata.[HN_2nd_line_pall_SACT_number_cycles]
+      ,chemodata.[HN_3rd_line_pall_SACT_regime]
+      ,chemodata.[HN_3rd_line_pall_SACT_start_date]
+      ,chemodata.[HN_3rd_line_pall_SACT_number_cycles]
+      ,chemodata.[HN_4th_line_pall_SACT_regime]
+      ,chemodata.[HN_4th_line_pall_SACT_start_date]
+      ,chemodata.[HN_4th_line_pall_SACT_number_cycles]
+      ,chemodata.[HN_5th_line_pall_SACT_regime]
+      ,chemodata.[HN_5th_line_pall_SACT_start_date]
+      ,chemodata.[HN_5th_line_pall_SACT_number_cycles]
+	  ,othercogstack.Enteral_feeding_CogStack
+	  ,othercogstack.Nasogastric_tube_CogStack
+	  ,ngdata.NG_NJ_Tube_First_Insertion_Data AS NG_insertion_date
+	  ,othercogstack.Gastrostomy_tube_CogStack
+	  ,othercogstack.Curative_procedure_intent_CogStack
+	  ,othercogstack.[Palliative _procedure_intent_CogStack]
+	  ,othercogstack.Complete_therapeutic_response_CogStack
+	  ,othercogstack.No_evidence_of_recurrence_of_cancer_CogStack
+	  ,othercogstack.Brain_metastases_CogStack
+	  ,othercogstack.Osteoradionecrosis_CogStack
+	  ,followup.LastFUdate
+	  ,followup.[AttendanceTypeDSC]
+	  ,followup.LastFUlocation
+	  ,followup.Deceased
+	  ,followup.DeathDTS
+	  ,[LFU_date_death_or_LFU_if_alive]
+      ,[OS_days]
+	  ,[Cause_of_death]
+      ,[Cause_of_death_other]
+	  ,[CogStack_CR_and_radical_RT]
+      ,[3m_RT_response]
+      ,[3m_imaging_modality]
+      ,[3m_imaging_date]
+      ,[6m_RT_response]
+      ,[6m_imaging_modality]
+      ,[6m_imaging_date]
+      ,[Biopsy_post_RT]
+      ,[Bx_date]
+      ,[Salvage_neck_dissection]
+      ,[ND_date]
+      ,[Failure]
+      ,[Failure_date]
+      ,[Failure_site_summary]
+      ,[Primary_failure_site_details]
+      ,[Primary_recurrence_date]
+      ,[Primary_recurrence_Rx]
+      ,[Primary_recurrence_intent]
+      ,[Nodal_or_locoregional_failure_site]
+      ,[Nodal_or_locoregional_non_primary_recurrence_date]
+      ,[Nodal_recurrence_Rx]
+      ,[Nodal_recurrence_intent]
+      ,[Metastatic_site]
+      ,[Met_recurrence_date]
+      ,[Met_recurrence_Rx]
+      ,[Met_recurrence_intent]
+      ,[Recurrence_after_RT]
+      ,[Time_to_failure_after_RT]
+      ,[In_field_recurrence__high_dose]
+      ,[In_field_recurrence__ppx_dose]
+	  ,pcodedata.[Postcode]
+      ,pcodedata.[Postcode_Status]
+      ,pcodedata.[LSOA_code]
+      ,pcodedata.[LSOA_Name]
+      ,pcodedata.[Index_of_Multiple_Deprivation_Rank]
+      ,pcodedata.[Index_of_Multiple_Deprivation_Decile]
+      ,pcodedata.[Income_Rank]
+      ,pcodedata.[Income_Decile]
+      ,pcodedata.[Income_Score]
+      ,pcodedata.[Employment_Rank]
+      ,pcodedata.[Employment_Decile]
+      ,pcodedata.[Employment_Score]
+      ,pcodedata.[Education_and_Skills_Rank]
+      ,pcodedata.[Education_and_Skills_Decile]
+      ,pcodedata.[Health_and_Disability_Rank]
+      ,pcodedata.[Health_and_Disability_Decile]
+      ,pcodedata.[Crime_Rank]
+      ,pcodedata.[Crime_Decile]
+      ,pcodedata.[Barriers_to_Housing_and_Services_Rank]
+      ,pcodedata.[Barriers_to_Housing_and_Services_Decile]
+      ,pcodedata.[Living_Environment_Rank]
+      ,pcodedata.[Living_Environment_Decile]
+      ,pcodedata.[IDACI_Rank]
+      ,pcodedata.[IDACI_Decile]
+      ,pcodedata.[IDACI_Score]
+      ,pcodedata.[IDAOPI_Rank]
+      ,pcodedata.[IDAOPI_Decile]
+      ,pcodedata.[IDAOPI_Score]
+
+  FROM [AICentre].[RTHN].[CohortUploadBASE] AS cohort
+  LEFT JOIN [AICentre].[RTHN].[CogStackComorbiditiesBASE] AS cogstack ON cogstack.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].HNListUpdatedBASE AS hnlist ON hnlist.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[FUDeathDataBASE] AS followup ON followup.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[AlcoholStatusDataBASE] AS alcostatus ON alcostatus.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[AlcoholAmountDataBASE] AS alcoamount ON alcoamount.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[SmokingStatusDataBASE] AS smokestatus ON smokestatus.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[SmokingAmountDataBASE] AS smokeamount ON smokeamount.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[OtherCancerDxBASE] AS otherca ON otherca.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[ECOGPSDataBASE] AS ecogps ON ecogps.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].AmalgamatedGTDiagnosisBASE AS diaghisto ON diaghisto.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[AmalgamatedDxDataIncMetsBASE] AS diaghisto2 ON diaghisto2.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[RTTreatmentDataFinalBASE] AS rttreatment ON rttreatment.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.BaselineToxicityDataBASE AS baselinetox ON baselinetox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk1RTToxicityDataBASE AS onewktox ON onewktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk2RTToxicityDataBASE AS twowktox ON twowktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk3RTToxicityDataBASE AS threewktox ON threewktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk4RTToxicityDataBASE AS fourwktox ON fourwktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk5RTToxicityDataBASE AS fivewktox ON fivewktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk6RTToxicityDataBASE AS sixwktox ON sixwktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.[1wkPostRTToxicityDataBASE] AS onewkposttox ON onewkposttox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.[2wkPostRTToxicityDataBASE] AS twowkposttox ON twowkposttox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.[6wkPostRTToxicityDataBASE] AS sixwkposttox ON sixwkposttox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[3mPostRTToxicityDataBASE] AS threemtox ON threemtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[6mPostRTToxicityDataBASE] AS sixmtox ON sixmtox.HospitalID = cohort.HospitalID
+    LEFT JOIN AICentre.RTHN.[9mPostRTToxicityDataBASE] AS ninemtox ON ninemtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[1yrPostRTToxicityDataBASE] AS oneyrtox ON oneyrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[2yrPostRTToxicityDataBASE] AS twoyrtox ON twoyrtox.HospitalID = cohort.HospitalID
+    LEFT JOIN AICentre.RTHN.[3yrPostRTToxicityDataBASE] AS threeyrtox ON threeyrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[4yrPostRTToxicityDataBASE] AS fouryrtox ON fouryrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[5yrPostRTToxicityDataBASE] AS fiveyrtox ON fiveyrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.MDMDataPivotedBASE AS mdm ON mdm.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.EORTC43DataPivotedBASE AS eortc ON eortc.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[QLQC30DataPivotedBASE] AS qlq ON qlq.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HNBSADataBASE AS bsa ON bsa.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[FBCDataBASE] AS fbc ON fbc.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[BiochemistryBASE] AS biochem ON biochem.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.BloodGroupDataBASE AS bloodgrp ON bloodgrp.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HNFirstTreatmentIntentBASE AS hnrxintent ON hnrxintent.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HNFirstTreatmentPlanBASE AS hnrxplan ON hnrxplan.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.OtherCogStackDataPointsBASE AS othercogstack ON othercogstack.Hospital_ID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HeightDataBASE AS  height ON height.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.InitialWeightDataBASE AS weight ON weight.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.FirstTreatmentDataBASE AS firstrx ON firstrx.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.AllChemoDataCombinedv2BASE AS chemodata ON chemodata.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.RTTargetVolFormsBASE AS targetvols ON targetvols.Hospital_Number = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.AllProcedureDataBASE AS procedures ON procedures.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.MosaiqPostCodeAddressDataBASE AS address ON address.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.PostCodeDeprivationDataBASE AS pcodedata ON pcodedata.Postcode = address.PostalCD
+  LEFT JOIN AICentre.RTHN.NGorNJTubeDataBASE AS ngdata ON ngdata.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.AriaIDsBASE AS ariaids ON ariaids.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[OutcomeDataBASE] AS outcomes ON outcomes.HospitalID = cohort.HospitalID
+
+
+  ORDER BY cohort.HospitalID
+
