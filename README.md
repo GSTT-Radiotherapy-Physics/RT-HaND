@@ -32,7 +32,7 @@ Researchers ...
 ## Overview
 ## Publications
 https://www.medrxiv.org/content/10.1101/2025.02.12.25322092v1
-
+https://www.thegreenjournal.com/article/S0167-8140(24)02911-6/abstract
 
 ## Resources
 Links to SOPs
