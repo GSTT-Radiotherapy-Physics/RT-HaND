@@ -31,7 +31,9 @@ Researchers ...
 
 ## Overview
 ## Publications
-Link publications here  
+https://www.medrxiv.org/content/10.1101/2025.02.12.25322092v1
+
+
 ## Resources
 Links to SOPs
 
