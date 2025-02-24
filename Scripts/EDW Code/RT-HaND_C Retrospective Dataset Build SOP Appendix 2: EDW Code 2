@@ -1,0 +1,1204 @@
+SELECT cohort.[HospitalID]
+      ,cohort.[NHSNumber]
+      ,cohort.[SurNM]
+      ,cohort.[ForeNM]
+      ,cohort.[DOB]
+      ,cohort.[Gender]
+      ,cohort.[Ethnicity]
+      ,cohort.[PostCD] AS Post_Code
+	  ,baselinetox.[Max_ObservationDTS] AS Baseline_tox_assess_date
+	  ,baselinetox.[Absolute day difference from RT start]
+      ,baselinetox.[Baseline_assess_point]
+      ,baselinetox.[Baseline_other_assess_point]
+      ,baselinetox.[Baseline_aspiration] AS Baseline_aspiration_CTCAE
+      ,baselinetox.[Baseline_dysphagia] AS Baseline_dysphagia_CTCAE
+      ,baselinetox.[Baseline_facial_oedema] AS Baseline_facial_oedema_CTCAE
+      ,baselinetox.[Baseline_mucositis] AS Baseline_mucositis_CTCAE
+      ,baselinetox.[Baseline_diet]
+      ,baselinetox.[Baseline_dysphonia] AS Baseline_dysphonia_CTCAE
+      ,baselinetox.[Baseline_pharyngolaryngeal_pain] AS Baseline_pharyngolaryngeal_pain_CTCAE
+      ,baselinetox.[Baseline_radiation_dermatitis] AS Baseline_radiation_dermatitis_CTCAE
+      ,baselinetox.[Baseline_tinnitus] AS Baseline_tinnitus_CTCAE
+	  ,baselinetox.[Baseline_trismus] AS Baseline_trismus_CTCAE
+      ,baselinetox.[Baseline_weight]
+      ,baselinetox.[Baseline_xerostomia] AS Baseline_xerostomia_CTCAE
+      ,baselinetox.[Baseline_feeding_tube_dependence]
+      ,baselinetox.[Baseline_ORN] AS Baseline_ORN_RTOG
+      ,baselinetox.[Baseline_salivary_glands] AS Baseline_salivary_glands_RTOG
+      ,baselinetox.[Baseline_skin_toxicity] AS Baseline_skin_toxicity_RTOG
+      ,baselinetox.[Baseline_speech] AS Baseline_speech_RTOG
+      ,baselinetox.[Baseline_clinical_study]
+      ,baselinetox.[Baseline_disease_assess]
+	  ,baselinetox.[Baseline_Rx_intent]
+      ,baselinetox.[Baseline_Rx_type]
+      ,baselinetox.[Baseline_pall_chemo]
+	  ,onewktox.[Max_ObservationDTS] AS Onewk_tox_assess_date
+	  ,onewktox.[Difference from start date]
+      ,onewktox.[Difference from end date]
+      ,onewktox.[Difference from day 7]
+      ,onewktox.[Absolute diff from day 7]
+      ,[Wk1_assess_point]
+      ,[Wk1_other_assess_point]
+	  ,[Wk1_aspiration] AS Wk1_aspiration_CTCAE
+      ,[Wk1_dysphagia] AS Wk1_dysphagia_CTCAE
+      ,[Wk1_facial_oedema] AS Wk1_facial_oedema_CTCAE
+      ,[Wk1_mucositis] AS Wk1_mucositis_CTCAE
+      ,[Wk1_diet]
+      ,[Wk1_dysphonia] AS Wk1_dysphonia_CTCAE
+      ,[Wk1_pharyngolaryngeal_pain] AS Wk1_pharyngolaryngeal_pain_CTCAE
+      ,[Wk1_radiation_dermatitis] AS Wk1_radiation_dermatitis_CTCAE
+      ,[Wk1_tinnitus] AS Wk1_tinnitus_CTCAE
+      ,[Wk1_trismus] AS Wk1_trismus_CTCAE
+      ,[Wk1_weight]
+      ,[Wk1_xerostomia] AS Wk1_xerostomia_CTCAE
+      ,[Wk1_feeding_tube_dependence]
+      ,[Wk1_clinical_study]
+      ,[Wk1_disease_assess]
+      ,[Wk1_Rx_intent]
+      ,[Wk1_Rx_type]
+      ,[Wk1_pall_chemo]
+	  ,twowktox.[Max_ObservationDTS] AS Twowk_tox_assess_date
+	  ,twowktox.[Difference from start date]
+      ,twowktox.[Difference from end date]
+      ,twowktox.[Difference from day 14]
+      ,twowktox.[Absolute diff from day 14]
+      ,[Wk2_assess_point]
+      ,[Wk2_other_assess_point]
+      ,[Wk2_aspiration] AS Wk2_aspiration_CTCAE
+      ,[Wk2_dysphagia] AS Wk2_dysphagia_CTCAE
+      ,[Wk2_facial_oedema] AS Wk2_facial_oedema_CTCAE
+      ,[Wk2_mucositis] AS Wk2_mucositis_CTCAE
+      ,[Wk2_diet]
+      ,[Wk2_dysphonia] AS Wk2_dysphonia_CTCAE
+      ,[Wk2_pharyngolaryngeal_pain] AS Wk2_pharyngolaryngeal_pain_CTCAE
+      ,[Wk2_radiation_dermatitis] AS Wk2_radiation_dermatitis_CTCAE
+      ,[Wk2_tinnitus] AS Wk2_tinnitus_CTCAE
+      ,[Wk2_trismus] AS Wk2_trismus_CTCAE
+      ,[Wk2_weight]
+      ,[Wk2_xerostomia] AS Wk2_xerostomia_CTCAE
+      ,[Wk2_feeding_tube_dependence]
+      ,[Wk2_clinical_study]
+      ,[Wk2_disease_assess]
+      ,[Wk2_Rx_intent]
+      ,[Wk2_Rx_type]
+      ,[Wk2_pall_chemo]
+	  ,threewktox.[Max_ObservationDTS] AS Threewk_tox_assess_date
+      ,threewktox.[Difference from start date]
+      ,threewktox.[Difference from end date]
+      ,threewktox.[Difference from day 21]
+      ,threewktox.[Absolute diff from day 21]
+      ,[Wk3_assess_point]
+      ,[Wk3_other_assess_point]
+      ,[Wk3_aspiration] AS Wk3_aspiration_CTCAE
+      ,[Wk3_dysphagia] AS Wk3_dysphagia_CTCAE
+      ,[Wk3_facial_oedema] AS Wk3_facial_oedema_CTCAE
+      ,[Wk3_mucositis] AS Wk3_mucositis_CTCAE
+      ,[Wk3_diet]
+      ,[Wk3_dysphonia] AS Wk3_dysphonia_CTCAE
+      ,[Wk3_pharyngolaryngeal_pain] AS Wk3_pharyngolaryngeal_pain_CTCAE
+      ,[Wk3_radiation_dermatitis] AS Wk3_radiation_dermatitis_CTCAE
+      ,[Wk3_tinnitus] AS Wk3_tinnitus_CTCAE
+      ,[Wk3_trismus] AS Wk3_trismus_CTCAE
+      ,[Wk3_weight]
+      ,[Wk3_xerostomia] AS Wk3_xerostomia_CTCAE
+      ,[Wk3_feeding_tube_dependence]
+      ,[Wk3_clinical_study]
+      ,[Wk3_disease_assess]
+      ,[Wk3_Rx_intent]
+      ,[Wk3_Rx_type]
+      ,[Wk3_pall_chemo]
+	  ,fourwktox.[Max_ObservationDTS] AS Fourwk_tox_assess_date
+	  ,fourwktox.[Difference from start date]
+      ,fourwktox.[Difference from end date]
+      ,fourwktox.[Difference from day 28]
+      ,fourwktox.[Absolute diff from day 28]
+      ,[Wk4_assess_point]
+      ,[Wk4_other_assess_point]
+      ,[Wk4_aspiration] AS Wk4_aspiration_CTCAE
+      ,[Wk4_dysphagia] AS Wk4_dysphagia_CTCAE
+      ,[Wk4_facial_oedema] AS Wk4_facial_oedema_CTCAE
+      ,[Wk4_mucositis] AS Wk4_mucositis_CTCAE
+      ,[Wk4_diet]
+      ,[Wk4_dysphonia] AS Wk4_dysphonia_CTCAE
+      ,[Wk4_pharyngolaryngeal_pain] AS Wk4_pharyngolaryngeal_pain_CTCAE
+      ,[Wk4_radiation_dermatitis] AS Wk4_radiation_dermatitis_CTCAE
+      ,[Wk4_tinnitus] AS Wk4_tinnitus_CTCAE
+      ,[Wk4_trismus] AS Wk4_trismus_CTCAE
+      ,[Wk4_weight]
+      ,[Wk4_xerostomia] AS Wk4_xerostomia_CTCAE
+      ,[Wk4_feeding_tube_dependence]
+      ,[Wk4_clinical_study]
+      ,[Wk4_disease_assess]
+      ,[Wk4_Rx_intent]
+      ,[Wk4_Rx_type]
+      ,[Wk4_pall_chemo]
+	  ,fivewktox.[Max_ObservationDTS] AS Fivewk_tox_assess_date
+	  ,fivewktox.[Difference from start date]
+      ,fivewktox.[Difference from end date]
+      ,fivewktox.[Difference from day 35]
+      ,fivewktox.[Absolute diff from day 35]
+      ,[Wk5_assess_point]
+      ,[Wk5_other_assess_point]
+      ,[Wk5_aspiration] AS Wk5_aspiration_CTCAE
+      ,[Wk5_dysphagia] AS Wk5_dysphagia_CTCAE
+      ,[Wk5_facial_oedema] AS Wk5_facial_oedema_CTCAE
+      ,[Wk5_mucositis] AS Wk5_mucositis_CTCAE
+      ,[Wk5_diet]
+      ,[Wk5_dysphonia] AS Wk5_dysphonia_CTCAE
+      ,[Wk5_pharyngolaryngeal_pain] AS Wk5_pharyngolaryngeal_pain_CTCAE
+      ,[Wk5_radiation_dermatitis] AS Wk5_radiation_dermatitis_CTCAE
+      ,[Wk5_tinnitus] AS Wk5_tinnitus_CTCAE
+      ,[Wk5_trismus] AS Wk5_trismus_CTCAE
+      ,[Wk5_weight]
+      ,[Wk5_xerostomia] AS Wk5_xerostomia_CTCAE
+      ,[Wk5_feeding_tube_dependence]
+      ,[Wk5_clinical_study]
+      ,[Wk5_disease_assess]
+      ,[Wk5_Rx_intent]
+      ,[Wk5_Rx_type]
+      ,[Wk5_pall_chemo]
+	  ,sixwktox.[Max_ObservationDTS] AS Sixwk_tox_assess_date
+	  ,sixwktox.[Difference from start date]
+      ,sixwktox.[Difference from end date]
+      ,sixwktox.[Difference from day 42]
+      ,sixwktox.[Absolute diff from day 42]
+      ,[Wk6_assess_point]
+      ,[Wk6_other_assess_point]
+      ,[Wk6_aspiration] AS Wk6_aspiration_CTCAE
+      ,[Wk6_dysphagia] AS Wk6_dysphagia_CTCAE
+      ,[Wk6_facial_oedema] AS Wk6_facial_oedema_CTCAE
+      ,[Wk6_mucositis] AS Wk6_mucositis_CTCAE
+      ,[Wk6_diet]
+      ,[Wk6_dysphonia] AS Wk6_dysphonia_CTCAE
+      ,[Wk6_pharyngolaryngeal_pain] AS Wk6_pharyngolaryngeal_pain_CTCAE
+      ,[Wk6_radiation_dermatitis] AS Wk6_radiation_dermatitis_CTCAE
+      ,[Wk6_tinnitus] AS Wk6_tinnitus_CTCAE
+      ,[Wk6_trismus] AS Wk6_trismus_CTCAE
+      ,[Wk6_weight]
+      ,[Wk6_xerostomia] AS Wk6_xerostomia_CTCAE
+      ,[Wk6_feeding_tube_dependence]
+      ,[Wk6_clinical_study]
+      ,[Wk6_disease_assess]
+      ,[Wk6_Rx_intent]
+      ,[Wk6_Rx_type]
+      ,[Wk6_pall_chemo]
+	  ,onewkposttox.[Max_ObservationDTS] AS Onewkpost_tox_assess_date
+	  ,onewkposttox.[Difference from start date]
+      ,onewkposttox.[Difference from end date]
+      ,onewkposttox.[Proximity to 7 days]
+      ,[1wk_post_assess_point]
+      ,[1wk_post_other_assess_point]
+      ,[1wkpost_Aspiration] AS One_wk_post_aspiration_CTCAE
+      ,[1wk_post_dysphagia] AS One_wk_post_dysphagia_CTCAE
+      ,[1wk_post_facial_oedema] AS One_wk_post_facial_oedema_CTCAE
+      ,[1wk_post_mucositis] AS One_wk_post_mucositis_CTCAE
+      ,[1wk_post_diet]
+      ,[1wk_post_dysphonia] AS One_wk_post_dysphonia_CTCAE
+      ,[1wk_post_pharyngolaryngeal_pain] AS One_wk_post_pharyngolaryngeal_pain_CTCAE
+      ,[1wk_post_radiation_dermatitis] AS One_wk_post_radiation_dermatitis_CTCAE
+      ,[1wk_post_tinnitus] AS One_wk_post_tinnitus_CTCAE
+      ,[1wk_post_trismus] AS One_wk_post_trismus_CTCAE
+      ,[1wk_post_weight]
+      ,[1wk_post_xerostomia] AS One_wk_post_xerostomia_CTCAE
+      ,[1wk_post_feeding_tube_dependence]
+      ,[1wk_post_clinical_study]
+      ,[1wk_post_disease_assess]
+      ,[1wk_post_Rx_intent]
+      ,[1wk_post_Rx_type]
+      ,[1wk_post_pall_chemo]
+	  ,twowkposttox.[Max_ObservationDTS] AS Twowkpost_tox_assess_date
+	  ,twowkposttox.[Difference from start date]
+      ,twowkposttox.[Difference from end date]
+      ,twowkposttox.[Proximity to 14 days]
+      ,[2wk_post_assess_point]
+      ,[2wk_post_other_assess_point]
+      ,[2wkpost_Aspiration] AS Two_wk_post_aspiration_CTCAE
+      ,[2wk_post_dysphagia] AS Two_wk_post_dysphagia_CTCAE
+      ,[2wk_post_facial_oedema] AS Two_wk_post_facial_oedema_CTCAE
+      ,[2wk_post_mucositis] AS Two_wk_post_mucositis_CTCAE
+      ,[2wk_post_diet]
+      ,[2wk_post_dysphonia] AS Two_wk_post_dysphonia_CTCAE
+      ,[2wk_post_pharyngolaryngeal_pain] AS Two_wk_post_pharyngolaryngeal_pain_CTCAE
+      ,[2wk_post_radiation_dermatitis] AS Two_wk_post_radiation_dermatitis_CTCAE
+      ,[2wk_post_tinnitus] AS Two_wk_post_tinnitus_CTCAE
+      ,[2wk_post_trismus] AS Two_wk_post_trismus_CTCAE
+      ,[2wk_post_weight]
+      ,[2wk_post_xerostomia] AS Two_wk_post_xerostomia_CTCAE
+      ,[2wk_post_feeding_tube_dependence]
+      ,[2wk_post_clinical_study]
+      ,[2wk_post_disease_assess]
+      ,[2wk_post_Rx_intent]
+      ,[2wk_post_Rx_type]
+      ,[2wk_post_pall_chemo]
+	  ,sixwkposttox.[Max_ObservationDTS] AS Sixwkpost_tox_assess_date
+	  ,sixwkposttox.[Difference from start date]
+      ,sixwkposttox.[Difference from end date]
+      ,sixwkposttox.[Proximity to 42 days]
+      ,[6wk_post_assess_point]
+      ,[6wk_post_other_assess_point]
+      ,[6wk_post_Aspiration] AS Six_wk_post_aspiration_CTCAE
+      ,[6wk_post_dysphagia] AS Six_wk_post_dysphagia_CTCAE
+      ,[6wk_post_facial_oedema] AS Six_wk_post_facial_oedema_CTCAE
+      ,[6wk_post_mucositis] AS Six_wk_post_mucositis_CTCAE
+      ,[6wk_post_diet]
+      ,[6wk_post_dysphonia] AS Six_wk_post_dysphonia_CTCAE
+      ,[6wk_post_pharyngolaryngeal_pain] AS Six_wk_post_pharyngolaryngeal_pain_CTCAE
+      ,[6wk_post_radiation_dermatitis] AS Six_wk_post_radiation_dermatitis_CTCAE
+      ,[6wk_post_tinnitus] AS Six_wk_post_tinnitus_CTCAE
+      ,[6wk_post_trismus] AS Six_wk_post_trismus_CTCAE
+      ,[6wk_post_weight]
+      ,[6wk_post_xerostomia] AS Six_wk_post_xerostomia_CTCAE
+      ,[6wk_post_feeding_tube_dependence]
+      ,[6wk_post_clinical_study]
+      ,[6wk_post_disease_assess]
+      ,[6wk_post_Rx_intent]
+      ,[6wk_post_Rx_type]
+      ,[6wk_post_pall_chemo]
+	  ,threemtox.[Max_ObservationDTS] AS Threempost_tox_assess_date
+      ,threemtox.[Difference from start date]
+      ,threemtox.[Difference from end date]
+      ,threemtox.[Proximity to 91 days]
+      ,[3m_post_assess_point]
+      ,[3m_post_other_assess_point]
+      ,[3m_post_Aspiration] AS Three_m_post_aspiration_CTCAE
+      ,[3m_post_dysphagia] AS Three_m_post_dysphagia_CTCAE
+      ,[3m_post_facial_oedema] AS Three_m_post_facial_oedema_CTCAE
+      ,[3m_post_mucositis] AS Three_m_post_mucositis_CTCAE
+      ,[3m_post_diet]
+      ,[3m_post_dysphonia] AS Three_m_post_dysphonia_CTCAE
+      ,[3m_post_pharyngolaryngeal_pain] AS Three_m_post_pharyngolaryngeal_pain_CTCAE
+      ,[3m_post_radiation_dermatitis] AS Three_m_post_radiation_dermatitis_CTCAE
+      ,[3m_post_tinnitus] AS Three_m_post_tinnitus_CTCAE
+      ,[3m_post_trismus] AS Three_m_post_trismus_CTCAE
+      ,[3m_post_weight]
+      ,[3m_post_xerostomia] AS Three_m_post_xerostomia_CTCAE
+      ,[3m_post_feeding_tube_dependence]
+      ,[3m_post_ORN] AS Three_m_post_ORN_RTOG
+      ,[3m_post_salivary_glands] AS Three_m_post_salivary_glands_RTOG
+      ,[3m_post_skin_toxicity] AS Three_m_post_skin_toxicity_RTOG
+      ,[3m_post_speech] AS Three_m_post_speech_RTOG
+      ,[3m_post_clinical_study]
+      ,[3m_post_disease_assess]
+      ,[3m_post_Rx_intent]
+      ,[3m_post_Rx_type]
+      ,[3m_post_pall_chemo]
+	  ,sixmtox.[Max_ObservationDTS] AS Sixmpost_tox_assess_date
+      ,sixmtox.[Difference from start date]
+      ,sixmtox.[Difference from end date]
+      ,sixmtox.[Proximity to 182 days]
+      ,[6m_post_assess_point]
+      ,[6m_post_other_assess_point]
+      ,[6m_post_Aspiration] AS Six_m_post_aspiration_CTCAE
+      ,[6m_post_dysphagia] AS Six_m_post_dysphagia_CTCAE
+      ,[6m_post_facial_oedema] AS Six_m_post_facial_oedema_CTCAE
+      ,[6m_post_mucositis] AS Six_m_post_mucositis_CTCAE
+      ,[6m_post_diet]
+      ,[6m_post_dysphonia] AS Six_m_post_dysphonia_CTCAE
+      ,[6m_post_pharyngolaryngeal_pain] AS Six_m_post_pharyngolaryngeal_pain_CTCAE
+      ,[6m_post_radiation_dermatitis] AS Six_m_post_radiation_dermatitis_CTCAE
+      ,[6m_post_tinnitus] AS Six_m_post_tinnitus_CTCAE
+      ,[6m_post_trismus] AS Six_m_post_trismus_CTCAE
+      ,[6m_post_weight]
+      ,[6m_post_xerostomia] AS Six_m_post_xerostomia_CTCAE
+      ,[6m_post_feeding_tube_dependence]
+      ,[6m_post_ORN] AS Six_m_post_ORN_RTOG
+      ,[6m_post_salivary_glands] AS Six_m_post_salivary_glands_RTOG
+      ,[6m_post_skin_toxicity] AS Six_m_post_skin_toxicity_RTOG
+      ,[6m_post_speech] AS Six_m_post_speech_RTOG
+      ,[6m_post_clinical_study]
+      ,[6m_post_disease_assess]
+      ,[6m_post_Rx_intent]
+      ,[6m_post_Rx_type]
+      ,[6m_post_pall_chemo]
+	  ,ninemtox.[Max_ObservationDTS] AS Ninempost_tox_assess_date
+      ,ninemtox.[Difference from start date]
+      ,ninemtox.[Difference from end date]
+      ,ninemtox.[Proximity to 274 days]
+      ,[9m_post_assess_point]
+      ,[9m_post_other_assess_point]
+      ,[9m_post_Aspiration] AS Nine_m_post_aspiration_CTCAE
+      ,[9m_post_dysphagia] AS Nine_m_post_dysphagia_CTCAE
+      ,[9m_post_facial_oedema] AS Nine_m_post_facial_oedema_CTCAE
+      ,[9m_post_mucositis] AS Nine_m_post_mucositis_CTCAE
+      ,[9m_post_diet]
+      ,[9m_post_dysphonia] AS Nine_m_post_dysphonia_CTCAE
+      ,[9m_post_pharyngolaryngeal_pain] AS Nine_m_post_pharyngolaryngeal_pain_CTCAE
+      ,[9m_post_radiation_dermatitis] AS Nine_m_post_radiation_dermatitis_CTCAE
+      ,[9m_post_tinnitus] AS Nine_m_post_tinnitus_CTCAE
+      ,[9m_post_trismus] AS Nine_m_post_trismus_CTCAE
+      ,[9m_post_weight]
+      ,[9m_post_xerostomia] AS Nine_m_post_xerostomia_CTCAE
+      ,[9m_post_feeding_tube_dependence]
+      ,[9m_post_ORN] AS Nine_m_post_ORN_RTOG
+      ,[9m_post_salivary_glands] AS Nine_m_post_salivary_glands_RTOG
+      ,[9m_post_skin_toxicity] AS Nine_m_post_skin_toxicity_RTOG
+      ,[9m_post_speech] AS Nine_m_post_speech_RTOG
+      ,[9m_post_clinical_study]
+      ,[9m_post_disease_assess]
+      ,[9m_post_Rx_intent]
+      ,[9m_post_Rx_type]
+      ,[9m_post_pall_chemo]
+	  ,oneyrtox.[Max_ObservationDTS] AS Oneyrpost_tox_assess_date
+	  ,oneyrtox.[Difference from start date]
+      ,oneyrtox.[Difference from end date]
+      ,oneyrtox.[Proximity to 365 days]
+      ,[1yr_post_assess_point]
+      ,[1yr_post_other_assess_point]
+      ,[1yr_post_Aspiration] AS One_yr_post_aspiration_CTCAE
+      ,[1yr_post_dysphagia] AS One_yr_post_dysphagia_CTCAE
+      ,[1yr_post_facial_oedema] AS One_yr_post_facial_oedema_CTCAE
+      ,[1yr_post_mucositis] AS One_yr_post_mucositis_CTCAE
+      ,[1yr_post_diet]
+      ,[1yr_post_dysphonia] AS One_yr_post_dysphonia_CTCAE
+      ,[1yr_post_pharyngolaryngeal_pain] AS One_yr_post_pharyngolaryngeal_pain_CTCAE
+      ,[1yr_post_radiation_dermatitis] AS One_yr_post_radiation_dermatitis_CTCAE
+      ,[1yr_post_tinnitus] AS One_yr_post_tinnitus_CTCAE
+      ,[1yr_post_trismus] AS One_yr_post_trismus_CTCAE
+      ,[1yr_post_weight]
+      ,[1yr_post_xerostomia] AS One_yr_post_xerostomia_CTCAE
+      ,[1yr_post_feeding_tube_dependence]
+      ,[1yr_post_ORN] AS One_yr_post_ORN_RTOG
+      ,[1yr_post_salivary_glands] AS One_yr_post_salivary_glands_RTOG
+      ,[1yr_post_skin_toxicity] AS One_yr_post_skin_toxicity_RTOG
+      ,[1yr_post_speech] AS One_yr_post_speech_RTOG
+      ,[1yr_post_clinical_study]
+      ,[1yr_post_disease_assess]
+      ,[1yr_post_Rx_intent]
+      ,[1yr_post_Rx_type]
+      ,[1yr_post_pall_chemo]
+	  ,twoyrtox.[Max_ObservationDTS] AS Twoyrpost_tox_assess_date
+	  ,twoyrtox.[Difference from start date]
+      ,twoyrtox.[Difference from end date]
+      ,twoyrtox.[Proximity to 730 days]
+      ,[2yr_post_assess_point]
+      ,[2yr_post_other_assess_point]
+      ,[2yr_post_Aspiration] AS Two_yr_post_aspiration_CTCAE
+      ,[2yr_post_dysphagia] AS Two_yr_post_dysphagia_CTCAE
+      ,[2yr_post_facial_oedema] AS Two_yr_post_facial_oedema_CTCAE
+      ,[2yr_post_mucositis] AS Two_yr_post_mucositis_CTCAE
+      ,[2yr_post_diet]
+      ,[2yr_post_dysphonia] AS Two_yr_post_dysphonia_CTCAE
+      ,[2yr_post_pharyngolaryngeal_pain] AS Two_yr_post_pharyngolaryngeal_pain_CTCAE
+      ,[2yr_post_radiation_dermatitis] AS Two_yr_post_radiation_dermatitis_CTCAE
+      ,[2yr_post_tinnitus] AS Two_yr_post_tinnitus_CTCAE
+      ,[2yr_post_trismus] AS Two_yr_post_trismus_CTCAE
+      ,[2yr_post_weight]
+      ,[2yr_post_xerostomia] AS Two_yr_post_xerostomia_CTCAE
+      ,[2yr_post_feeding_tube_dependence]
+      ,[2yr_post_ORN] AS Two_yr_post_ORN_RTOG
+      ,[2yr_post_salivary_glands] AS Two_yr_post_salivary_glands_RTOG
+      ,[2yr_post_skin_toxicity] AS Two_yr_post_skin_toxicity_RTOG
+      ,[2yr_post_speech] AS Two_yr_post_speech_RTOG
+      ,[2yr_post_clinical_study]
+      ,[2yr_post_disease_assess]
+      ,[2yr_post_Rx_intent]
+      ,[2yr_post_Rx_type]
+      ,[2yr_post_pall_chemo]
+	  ,threeyrtox.[Max_ObservationDTS] AS Threeyrpost_tox_assess_date
+      ,threeyrtox.[Difference from start date]
+      ,threeyrtox.[Difference from end date]
+      ,threeyrtox.[Proximity to 1095 days]
+      ,[3yr_post_assess_point]
+      ,[3yr_post_other_assess_point]
+      ,[3yr_post_Aspiration] AS Three_yr_post_aspiration_CTCAE
+      ,[3yr_post_dysphagia] AS Three_yr_post_dysphagia_CTCAE
+      ,[3yr_post_facial_oedema] AS Three_yr_post_facial_oedema_CTCAE
+      ,[3yr_post_mucositis] AS Three_yr_post_mucositis_CTCAE
+      ,[3yr_post_diet]
+      ,[3yr_post_dysphonia] AS Three_yr_post_dysphonia_CTCAE
+      ,[3yr_post_pharyngolaryngeal_pain] AS Three_yr_post_pharyngolaryngeal_pain_CTCAE
+      ,[3yr_post_radiation_dermatitis] AS Three_yr_post_radiation_dermatitis_CTCAE
+      ,[3yr_post_tinnitus] AS Three_yr_post_tinnitus_CTCAE
+      ,[3yr_post_trismus] AS Three_yr_post_trismus_CTCAE
+      ,[3yr_post_weight]
+      ,[3yr_post_xerostomia] AS Three_yr_post_xerostomia_CTCAE
+      ,[3yr_post_feeding_tube_dependence]
+      ,[3yr_post_ORN] AS Three_yr_post_ORN_RTOG
+      ,[3yr_post_salivary_glands] AS Three_yr_post_salivary_glands_RTOG
+      ,[3yr_post_skin_toxicity] AS Three_yr_post_skin_toxicity_RTOG
+      ,[3yr_post_speech] AS Three_yr_post_speech_RTOG
+      ,[3yr_post_clinical_study]
+      ,[3yr_post_disease_assess]
+      ,[3yr_post_Rx_intent]
+      ,[3yr_post_Rx_type]
+      ,[3yr_post_pall_chemo]
+	  ,fouryrtox.[Max_ObservationDTS] AS Fouryrpost_tox_assess_date
+	  ,fouryrtox.[Difference from start date]
+      ,fouryrtox.[Difference from end date]
+      ,fouryrtox.[Proximity to 1460 days]
+      ,[4yr_post_assess_point]
+      ,[4yr_post_other_assess_point]
+      ,[4yr_post_Aspiration] AS Four_yr_post_aspiration_CTCAE
+      ,[4yr_post_dysphagia] AS Four_yr_post_dysphagia_CTCAE
+      ,[4yr_post_facial_oedema] AS Four_yr_post_facial_oedema_CTCAE
+      ,[4yr_post_mucositis] AS Four_yr_post_mucositis_CTCAE
+      ,[4yr_post_diet]
+      ,[4yr_post_dysphonia] AS Four_yr_post_dysphonia_CTCAE
+      ,[4yr_post_pharyngolaryngeal_pain] AS Four_yr_post_pharyngolaryngeal_pain_CTCAE
+      ,[4yr_post_radiation_dermatitis] AS Four_yr_post_radiation_dermatitis_CTCAE
+      ,[4yr_post_tinnitus] AS Four_yr_post_tinnitus_CTCAE
+      ,[4yr_post_trismus] AS Four_yr_post_trismus_CTCAE
+      ,[4yr_post_weight]
+      ,[4yr_post_xerostomia] AS Four_yr_post_xerostomia_CTCAE
+      ,[4yr_post_feeding_tube_dependence]
+      ,[4yr_post_ORN] AS Four_yr_post_ORN_RTOG
+      ,[4yr_post_salivary_glands] AS Four_yr_post_salivary_glands_RTOG
+      ,[4yr_post_skin_toxicity] AS Four_yr_post_skin_toxicity_RTOG
+      ,[4yr_post_speech] AS Four_yr_post_speech_RTOG
+      ,[4yr_post_clinical_study]
+      ,[4yr_post_disease_assess]
+      ,[4yr_post_Rx_intent]
+      ,[4yr_post_Rx_type]
+      ,[4yr_post_pall_chemo]
+	  ,fiveyrtox.[Max_ObservationDTS] AS Fiveyrpost_tox_assess_date
+      ,fiveyrtox.[Difference from start date]
+      ,fiveyrtox.[Difference from end date]
+      ,fiveyrtox.[Proximity to 1825 days]
+      ,fiveyrtox.[5yr_post_assess_point]
+      ,fiveyrtox.[5yr_post_other_assess_point]
+      ,fiveyrtox.[5yr_post_Aspiration] AS Five_yr_post_aspiration_CTCAE
+      ,fiveyrtox.[5yr_post_dysphagia] AS Five_yr_post_dysphagia_CTCAE
+      ,fiveyrtox.[5yr_post_facial_oedema] AS Five_yr_post_facial_oedema_CTCAE
+      ,fiveyrtox.[5yr_post_mucositis] AS Five_yr_post_mucositis_CTCAE
+      ,fiveyrtox.[5yr_post_diet]
+      ,fiveyrtox.[5yr_post_dysphonia] AS Five_yr_post_dysphonia_CTCAE
+      ,fiveyrtox.[5yr_post_pharyngolaryngeal_pain] AS Five_yr_post_pharyngolaryngeal_pain_CTCAE
+      ,fiveyrtox.[5yr_post_radiation_dermatitis] AS Five_yr_post_radiation_dermatitis_CTCAE
+      ,fiveyrtox.[5yr_post_tinnitus] AS Five_yr_post_tinnitus_CTCAE
+      ,fiveyrtox.[5yr_post_trismus] AS Five_yr_post_trismus_CTCAE
+      ,fiveyrtox.[5yr_post_weight]
+      ,fiveyrtox.[5yr_post_xerostomia] AS Five_yr_post_xerostomia_CTCAE
+      ,fiveyrtox.[5yr_post_feeding_tube_dependence]
+      ,fiveyrtox.[5yr_post_ORN] AS Five_yr_post_ORN_RTOG
+      ,fiveyrtox.[5yr_post_salivary_glands] AS Five_yr_post_salivary_glands_RTOG
+      ,fiveyrtox.[5yr_post_skin_toxicity] AS Five_yr_post_skin_toxicity_RTOG
+      ,fiveyrtox.[5yr_post_speech] AS Five_yr_post_speech_RTOG
+      ,fiveyrtox.[5yr_post_clinical_study]
+      ,fiveyrtox.[5yr_post_disease_assess]
+      ,fiveyrtox.[5yr_post_Rx_intent]
+      ,fiveyrtox.[5yr_post_Rx_type]
+      ,fiveyrtox.[5yr_post_pall_chemo]
+	  ,fiveyrtoxplus.[Max_ObservationDTS] AS Fiveyrpluspost_tox_assess_date
+      ,fiveyrtoxplus.[Difference from start date]
+      ,fiveyrtoxplus.[Difference from end date]
+      ,fiveyrtoxplus.[Proximity to 1825 days]
+      ,fiveyrtoxplus.[5yr_post_assess_point] AS Fiveyr_plus_post_assess_point
+      ,fiveyrtoxplus.[5yr_post_other_assess_point] AS Fiveyr_plus_post_other_assess_point
+      ,fiveyrtoxplus.[5yr_post_Aspiration] AS Fiveyr_plus_post_Aspiration_CTCAE
+      ,fiveyrtoxplus.[5yr_post_dysphagia] AS Fiveyr_plus_post_dysphagia_CTCAE
+      ,fiveyrtoxplus.[5yr_post_facial_oedema] AS Fiveyr_plus_post_facial_oedema_CTCAE
+      ,fiveyrtoxplus.[5yr_post_mucositis] AS Fiveyr_plus_post_mucositis_CTCAE
+      ,fiveyrtoxplus.[5yr_post_diet] AS Fiveyr_plus_post_diet
+      ,fiveyrtoxplus.[5yr_post_dysphonia] AS Fiveyr_plus_post_dysphonia_CTCAE
+      ,fiveyrtoxplus.[5yr_post_pharyngolaryngeal_pain] AS Fiveyr_plus_post_pharyngolaryngeal_pain_CTCAE
+      ,fiveyrtoxplus.[5yr_post_radiation_dermatitis] AS Fiveyr_plus_post_radiation_dermatitis_CTCAE
+      ,fiveyrtoxplus.[5yr_post_tinnitus] AS Fiveyr_plus_post_tinnitus_CTCAE
+      ,fiveyrtoxplus.[5yr_post_trismus] AS Fiveyr_plus_post_trismus_CTCAE
+      ,fiveyrtoxplus.[5yr_post_weight] AS Fiveyr_plus_post_weight
+      ,fiveyrtoxplus.[5yr_post_xerostomia] AS Fiveyr_plus_post_xerostomia_CTCAE
+      ,fiveyrtoxplus.[5yr_post_feeding_tube_dependence] AS Fiveyr_plus_post_feeding_tube_dependence
+      ,fiveyrtoxplus.[5yr_post_ORN] AS Fiveyr_plus_post_ORN_RTOG
+      ,fiveyrtoxplus.[5yr_post_salivary_glands] AS Fiveyr_plus_post_salivary_glands_RTOG
+      ,fiveyrtoxplus.[5yr_post_skin_toxicity] AS Fiveyr_plus_post_skin_toxicity_RTOG
+      ,fiveyrtoxplus.[5yr_post_speech] AS Fiveyr_plus_post_speech_RTOG
+      ,fiveyrtoxplus.[5yr_post_clinical_study] AS Fiveyr_plus_post_clinical_study
+      ,fiveyrtoxplus.[5yr_post_disease_assess] AS Fiveyr_plus_post_disease_assess
+      ,fiveyrtoxplus.[5yr_post_Rx_intent] Fiveyr_plus_post_Rx_intent
+      ,fiveyrtoxplus.[5yr_post_Rx_type] AS Fiveyr_plus_post_Rx_type
+      ,fiveyrtoxplus.[5yr_post_pall_chemo] AS Fiveyr_plus_post_pall_chemo
+	 ,[FormName_1]
+      ,eortc.[FormCompletedDate_1]
+      ,[Calculated_Pain_in_mouth_1]
+      ,[Calculated_Swallowing_1]
+      ,[Calculated_Teeth_1]
+      ,[Calculated_Dry_Mouth_1]
+      ,[Calculated_Problems_with_senses_1]
+      ,[Calculated_Speech_1]
+      ,[Calculated_Body_Image_1]
+      ,[Calculated_Social_Eating_1]
+      ,[Sexuality_1]
+      ,[Calculated_Shoulder_1]
+      ,[Calculated_Skin_Problems_1]
+      ,[Calculated_Fear_of_progression_1]
+      ,[Calculated_Mouth_Opening_1]
+      ,[Calculated_Cough_1]
+      ,[Calculated_Social_contact_1]
+      ,[Calculated_Swelling_in_the_neck_1]
+      ,[Calculated_Weight_loss_1]
+      ,[Calculated_Problems_with_wound_healing_1]
+      ,[Calculated_Neurological_problems_1]
+      ,[FormName_2]
+      ,eortc.[FormCompletedDate_2]
+      ,[Calculated_Pain_in_mouth_2]
+      ,[Calculated_Swallowing_2]
+      ,[Calculated_Teeth_2]
+      ,[Calculated_Dry_Mouth_2]
+      ,[Calculated_Problems_with_senses_2]
+      ,[Calculated_Speech_2]
+      ,[Calculated_Body_Image_2]
+      ,[Calculated_Social_Eating_2]
+      ,[Sexuality_2]
+      ,[Calculated_Shoulder_2]
+      ,[Calculated_Skin_Problems_2]
+      ,[Calculated_Fear_of_progression_2]
+      ,[Calculated_Mouth_Opening_2]
+      ,[Calculated_Cough_2]
+      ,[Calculated_Social_contact_2]
+      ,[Calculated_Swelling_in_the_neck_2]
+      ,[Calculated_Weight_loss_2]
+      ,[Calculated_Problems_with_wound_healing_2]
+      ,[Calculated_Neurological_problems_2]
+      ,[FormName_3]
+      ,eortc.[FormCompletedDate_3]
+      ,[Calculated_Pain_in_mouth_3]
+      ,[Calculated_Swallowing_3]
+      ,[Calculated_Teeth_3]
+      ,[Calculated_Dry_Mouth_3]
+      ,[Calculated_Problems_with_senses_3]
+      ,[Calculated_Speech_3]
+      ,[Calculated_Body_Image_3]
+      ,[Calculated_Social_Eating_3]
+      ,[Sexuality_3]
+      ,[Calculated_Shoulder_3]
+      ,[Calculated_Skin_Problems_3]
+      ,[Calculated_Fear_of_progression_3]
+      ,[Calculated_Mouth_Opening_3]
+      ,[Calculated_Cough_3]
+      ,[Calculated_Social_contact_3]
+      ,[Calculated_Swelling_in_the_neck_3]
+      ,[Calculated_Weight_loss_3]
+      ,[Calculated_Problems_with_wound_healing_3]
+      ,[Calculated_Neurological_problems_3]
+      ,[FormName_4]
+      ,eortc.[FormCompletedDate_4]
+      ,[Calculated_Pain_in_mouth_4]
+      ,[Calculated_Swallowing_4]
+      ,[Calculated_Teeth_4]
+      ,[Calculated_Dry_Mouth_4]
+      ,[Calculated_Problems_with_senses_4]
+      ,[Calculated_Speech_4]
+      ,[Calculated_Body_Image_4]
+      ,[Calculated_Social_Eating_4]
+      ,[Sexuality_4]
+      ,[Calculated_Shoulder_4]
+      ,[Calculated_Skin_Problems_4]
+      ,[Calculated_Fear_of_progression_4]
+      ,[Calculated_Mouth_Opening_4]
+      ,[Calculated_Cough_4]
+      ,[Calculated_Social_contact_4]
+      ,[Calculated_Swelling_in_the_neck_4]
+      ,[Calculated_Weight_loss_4]
+      ,[Calculated_Problems_with_wound_healing_4]
+      ,[Calculated_Neurological_problems_4]
+      ,[FormName_5]
+      ,eortc.[FormCompletedDate_5]
+      ,[Calculated_Pain_in_mouth_5]
+      ,[Calculated_Swallowing_5]
+      ,[Calculated_Teeth_5]
+      ,[Calculated_Dry_Mouth_5]
+      ,[Calculated_Problems_with_senses_5]
+      ,[Calculated_Speech_5]
+      ,[Calculated_Body_Image_5]
+      ,[Calculated_Social_Eating_5]
+      ,[Sexuality_5]
+      ,[Calculated_Shoulder_5]
+      ,[Calculated_Skin_Problems_5]
+      ,[Calculated_Fear_of_progression_5]
+      ,[Calculated_Mouth_Opening_5]
+      ,[Calculated_Cough_5]
+      ,[Calculated_Social_contact_5]
+      ,[Calculated_Swelling_in_the_neck_5]
+      ,[Calculated_Weight_loss_5]
+      ,[Calculated_Problems_with_wound_healing_5]
+      ,[Calculated_Neurological_problems_5]
+      ,[FormName_6]
+      ,eortc.[FormCompletedDate_6]
+      ,[Calculated_Pain_in_mouth_6]
+      ,[Calculated_Swallowing_6]
+      ,[Calculated_Teeth_6]
+      ,[Calculated_Dry_Mouth_6]
+      ,[Calculated_Problems_with_senses_6]
+      ,[Calculated_Speech_6]
+      ,[Calculated_Body_Image_6]
+      ,[Calculated_Social_Eating_6]
+      ,[Sexuality_6]
+      ,[Calculated_Shoulder_6]
+      ,[Calculated_Skin_Problems_6]
+      ,[Calculated_Fear_of_progression_6]
+      ,[Calculated_Mouth_Opening_6]
+      ,[Calculated_Cough_6]
+      ,[Calculated_Social_contact_6]
+      ,[Calculated_Swelling_in_the_neck_6]
+      ,[Calculated_Weight_loss_6]
+      ,[Calculated_Problems_with_wound_healing_6]
+      ,[Calculated_Neurological_problems_6]
+      ,[FormName_7]
+      ,eortc.[FormCompletedDate_7]
+      ,[Calculated_Pain_in_mouth_7]
+      ,[Calculated_Swallowing_7]
+      ,[Calculated_Teeth_7]
+      ,[Calculated_Dry_Mouth_7]
+      ,[Calculated_Problems_with_senses_7]
+      ,[Calculated_Speech_7]
+      ,[Calculated_Body_Image_7]
+      ,[Calculated_Social_Eating_7]
+      ,[Sexuality_7]
+      ,[Calculated_Shoulder_7]
+      ,[Calculated_Skin_Problems_7]
+      ,[Calculated_Fear_of_progression_7]
+      ,[Calculated_Mouth_Opening_7]
+      ,[Calculated_Cough_7]
+      ,[Calculated_Social_contact_7]
+      ,[Calculated_Swelling_in_the_neck_7]
+      ,[Calculated_Weight_loss_7]
+      ,[Calculated_Problems_with_wound_healing_7]
+      ,[Calculated_Neurological_problems_7]
+      ,[FormName_8]
+      ,eortc.[FormCompletedDate_8]
+      ,[Calculated_Pain_in_mouth_8]
+      ,[Calculated_Swallowing_8]
+      ,[Calculated_Teeth_8]
+      ,[Calculated_Dry_Mouth_8]
+      ,[Calculated_Problems_with_senses_8]
+      ,[Calculated_Speech_8]
+      ,[Calculated_Body_Image_8]
+      ,[Calculated_Social_Eating_8]
+      ,[Sexuality_8]
+      ,[Calculated_Shoulder_8]
+      ,[Calculated_Skin_Problems_8]
+      ,[Calculated_Fear_of_progression_8]
+      ,[Calculated_Mouth_Opening_8]
+      ,[Calculated_Cough_8]
+      ,[Calculated_Social_contact_8]
+      ,[Calculated_Swelling_in_the_neck_8]
+      ,[Calculated_Weight_loss_8]
+      ,[Calculated_Problems_with_wound_healing_8]
+      ,[Calculated_Neurological_problems_8]
+      ,[FormName_9]
+      ,eortc.[FormCompletedDate_9]
+      ,[Calculated_Pain_in_mouth_9]
+      ,[Calculated_Swallowing_9]
+      ,[Calculated_Teeth_9]
+      ,[Calculated_Dry_Mouth_9]
+      ,[Calculated_Problems_with_senses_9]
+      ,[Calculated_Speech_9]
+      ,[Calculated_Body_Image_9]
+      ,[Calculated_Social_Eating_9]
+      ,[Sexuality_9]
+      ,[Calculated_Shoulder_9]
+      ,[Calculated_Skin_Problems_9]
+      ,[Calculated_Fear_of_progression_9]
+      ,[Calculated_Mouth_Opening_9]
+      ,[Calculated_Cough_9]
+      ,[Calculated_Social_contact_9]
+      ,[Calculated_Swelling_in_the_neck_9]
+      ,[Calculated_Weight_loss_9]
+      ,[Calculated_Problems_with_wound_healing_9]
+      ,[Calculated_Neurological_problems_9]
+      ,[FormName_10]
+      ,[FormCompletedDate_10]
+      ,[Calculated_Pain_in_mouth_10]
+      ,[Calculated_Swallowing_10]
+      ,[Calculated_Teeth_10]
+      ,[Calculated_Dry_Mouth_10]
+      ,[Calculated_Problems_with_senses_10]
+      ,[Calculated_Speech_10]
+      ,[Calculated_Body_Image_10]
+      ,[Calculated_Social_Eating_10]
+      ,[Sexuality_10]
+      ,[Calculated_Shoulder_10]
+      ,[Calculated_Skin_Problems_10]
+      ,[Calculated_Fear_of_progression_10]
+      ,[Calculated_Mouth_Opening_10]
+      ,[Calculated_Cough_10]
+      ,[Calculated_Social_contact_10]
+      ,[Calculated_Swelling_in_the_neck_10]
+      ,[Calculated_Weight_loss_10]
+      ,[Calculated_Problems_with_wound_healing_10]
+      ,[Calculated_Neurological_problems_10]
+      ,[FormName_11]
+      ,[FormCompletedDate_11]
+      ,[Calculated_Pain_in_mouth_11]
+      ,[Calculated_Swallowing_11]
+      ,[Calculated_Teeth_11]
+      ,[Calculated_Dry_Mouth_11]
+      ,[Calculated_Problems_with_senses_11]
+      ,[Calculated_Speech_11]
+      ,[Calculated_Body_Image_11]
+      ,[Calculated_Social_Eating_11]
+      ,[Sexuality_11]
+      ,[Calculated_Shoulder_11]
+      ,[Calculated_Skin_Problems_11]
+      ,[Calculated_Fear_of_progression_11]
+      ,[Calculated_Mouth_Opening_11]
+      ,[Calculated_Cough_11]
+      ,[Calculated_Social_contact_11]
+      ,[Calculated_Swelling_in_the_neck_11]
+      ,[Calculated_Weight_loss_11]
+      ,[Calculated_Problems_with_wound_healing_11]
+      ,[Calculated_Neurological_problems_11]
+      ,[FormName_12]
+      ,[FormCompletedDate_12]
+      ,[Calculated_Pain_in_mouth_12]
+      ,[Calculated_Swallowing_12]
+      ,[Calculated_Teeth_12]
+      ,[Calculated_Dry_Mouth_12]
+      ,[Calculated_Problems_with_senses_12]
+      ,[Calculated_Speech_12]
+      ,[Calculated_Body_Image_12]
+      ,[Calculated_Social_Eating_12]
+      ,[Sexuality_12]
+      ,[Calculated_Shoulder_12]
+      ,[Calculated_Skin_Problems_12]
+      ,[Calculated_Fear_of_progression_12]
+      ,[Calculated_Mouth_Opening_12]
+      ,[Calculated_Cough_12]
+      ,[Calculated_Social_contact_12]
+      ,[Calculated_Swelling_in_the_neck_12]
+      ,[Calculated_Weight_loss_12]
+      ,[Calculated_Problems_with_wound_healing_12]
+      ,[Calculated_Neurological_problems_12]
+      ,[FormName_13]
+      ,[FormCompletedDate_13]
+      ,[Calculated_Pain_in_mouth_13]
+      ,[Calculated_Swallowing_13]
+      ,[Calculated_Teeth_13]
+      ,[Calculated_Dry_Mouth_13]
+      ,[Calculated_Problems_with_senses_13]
+      ,[Calculated_Speech_13]
+      ,[Calculated_Body_Image_13]
+      ,[Calculated_Social_Eating_13]
+      ,[Sexuality_13]
+      ,[Calculated_Shoulder_13]
+      ,[Calculated_Skin_Problems_13]
+      ,[Calculated_Fear_of_progression_13]
+      ,[Calculated_Mouth_Opening_13]
+      ,[Calculated_Cough_13]
+      ,[Calculated_Social_contact_13]
+      ,[Calculated_Swelling_in_the_neck_13]
+      ,[Calculated_Weight_loss_13]
+      ,[Calculated_Problems_with_wound_healing_13]
+      ,[Calculated_Neurological_problems_13]
+      ,[FormName_14]
+      ,[FormCompletedDate_14]
+      ,[Calculated_Pain_in_mouth_14]
+      ,[Calculated_Swallowing_14]
+      ,[Calculated_Teeth_14]
+      ,[Calculated_Dry_Mouth_14]
+      ,[Calculated_Problems_with_senses_14]
+      ,[Calculated_Speech_14]
+      ,[Calculated_Body_Image_14]
+      ,[Calculated_Social_Eating_14]
+      ,[Sexuality_14]
+      ,[Calculated_Shoulder_14]
+      ,[Calculated_Skin_Problems_14]
+      ,[Calculated_Fear_of_progression_14]
+      ,[Calculated_Mouth_Opening_14]
+      ,[Calculated_Cough_14]
+      ,[Calculated_Social_contact_14]
+      ,[Calculated_Swelling_in_the_neck_14]
+      ,[Calculated_Weight_loss_14]
+      ,[Calculated_Problems_with_wound_healing_14]
+      ,[Calculated_Neurological_problems_14]
+      ,[FormName_15]
+      ,[FormCompletedDate_15]
+      ,[Calculated_Pain_in_mouth_15]
+      ,[Calculated_Swallowing_15]
+      ,[Calculated_Teeth_15]
+      ,[Calculated_Dry_Mouth_15]
+      ,[Calculated_Problems_with_senses_15]
+      ,[Calculated_Speech_15]
+      ,[Calculated_Body_Image_15]
+      ,[Calculated_Social_Eating_15]
+      ,[Sexuality_15]
+      ,[Calculated_Shoulder_15]
+      ,[Calculated_Skin_Problems_15]
+      ,[Calculated_Fear_of_progression_15]
+      ,[Calculated_Mouth_Opening_15]
+      ,[Calculated_Cough_15]
+      ,[Calculated_Social_contact_15]
+      ,[Calculated_Swelling_in_the_neck_15]
+      ,[Calculated_Weight_loss_15]
+      ,[Calculated_Problems_with_wound_healing_15]
+      ,[Calculated_Neurological_problems_15]
+      ,[FormName_16]
+      ,[FormCompletedDate_16]
+      ,[Calculated_Pain_in_mouth_16]
+      ,[Calculated_Swallowing_16]
+      ,[Calculated_Teeth_16]
+      ,[Calculated_Dry_Mouth_16]
+      ,[Calculated_Problems_with_senses_16]
+      ,[Calculated_Speech_16]
+      ,[Calculated_Body_Image_16]
+      ,[Calculated_Social_Eating_16]
+      ,[Sexuality_16]
+      ,[Calculated_Shoulder_16]
+      ,[Calculated_Skin_Problems_16]
+      ,[Calculated_Fear_of_progression_16]
+      ,[Calculated_Mouth_Opening_16]
+      ,[Calculated_Cough_16]
+      ,[Calculated_Social_contact_16]
+      ,[Calculated_Swelling_in_the_neck_16]
+      ,[Calculated_Weight_loss_16]
+      ,[Calculated_Problems_with_wound_healing_16]
+      ,[Calculated_Neurological_problems_16]
+      ,[FormName_17]
+      ,[FormCompletedDate_17]
+      ,[Calculated_Pain_in_mouth_17]
+      ,[Calculated_Swallowing_17]
+      ,[Calculated_Teeth_17]
+      ,[Calculated_Dry_Mouth_17]
+      ,[Calculated_Problems_with_senses_17]
+      ,[Calculated_Speech_17]
+      ,[Calculated_Body_Image_17]
+      ,[Calculated_Social_Eating_17]
+      ,[Sexuality_17]
+      ,[Calculated_Shoulder_17]
+      ,[Calculated_Skin_Problems_17]
+      ,[Calculated_Fear_of_progression_17]
+      ,[Calculated_Mouth_Opening_17]
+      ,[Calculated_Cough_17]
+      ,[Calculated_Social_contact_17]
+      ,[Calculated_Swelling_in_the_neck_17]
+      ,[Calculated_Weight_loss_17]
+      ,[Calculated_Problems_with_wound_healing_17]
+      ,[Calculated_Neurological_problems_17]
+      ,[FormName_18]
+      ,[FormCompletedDate_18]
+      ,[Calculated_Pain_in_mouth_18]
+      ,[Calculated_Swallowing_18]
+      ,[Calculated_Teeth_18]
+      ,[Calculated_Dry_Mouth_18]
+      ,[Calculated_Problems_with_senses_18]
+      ,[Calculated_Speech_18]
+      ,[Calculated_Body_Image_18]
+      ,[Calculated_Social_Eating_18]
+      ,[Sexuality_18]
+      ,[Calculated_Shoulder_18]
+      ,[Calculated_Skin_Problems_18]
+      ,[Calculated_Fear_of_progression_18]
+      ,[Calculated_Mouth_Opening_18]
+      ,[Calculated_Cough_18]
+      ,[Calculated_Social_contact_18]
+      ,[Calculated_Swelling_in_the_neck_18]
+      ,[Calculated_Weight_loss_18]
+      ,[Calculated_Problems_with_wound_healing_18]
+      ,[Calculated_Neurological_problems_18]
+      ,[FormName_19]
+      ,[FormCompletedDate_19]
+      ,[Calculated_Pain_in_mouth_19]
+      ,[Calculated_Swallowing_19]
+      ,[Calculated_Teeth_19]
+      ,[Calculated_Dry_Mouth_19]
+      ,[Calculated_Problems_with_senses_19]
+      ,[Calculated_Speech_19]
+      ,[Calculated_Body_Image_19]
+      ,[Calculated_Social_Eating_19]
+      ,[Sexuality_19]
+      ,[Calculated_Shoulder_19]
+      ,[Calculated_Skin_Problems_19]
+      ,[Calculated_Fear_of_progression_19]
+      ,[Calculated_Mouth_Opening_19]
+      ,[Calculated_Cough_19]
+      ,[Calculated_Social_contact_19]
+      ,[Calculated_Swelling_in_the_neck_19]
+      ,[Calculated_Weight_loss_19]
+      ,[Calculated_Problems_with_wound_healing_19]
+      ,[Calculated_Neurological_problems_19]
+      ,[FormName_20]
+      ,[FormCompletedDate_20]
+      ,[Calculated_Pain_in_mouth_20]
+      ,[Calculated_Swallowing_20]
+      ,[Calculated_Teeth_20]
+      ,[Calculated_Dry_Mouth_20]
+      ,[Calculated_Problems_with_senses_20]
+      ,[Calculated_Speech_20]
+      ,[Calculated_Body_Image_20]
+      ,[Calculated_Social_Eating_20]
+      ,[Sexuality_20]
+      ,[Calculated_Shoulder_20]
+      ,[Calculated_Skin_Problems_20]
+      ,[Calculated_Fear_of_progression_20]
+      ,[Calculated_Mouth_Opening_20]
+      ,[Calculated_Cough_20]
+      ,[Calculated_Social_contact_20]
+      ,[Calculated_Swelling_in_the_neck_20]
+      ,[Calculated_Weight_loss_20]
+      ,[Calculated_Problems_with_wound_healing_20]
+      ,[Calculated_Neurological_problems_20]
+      ,qlq.[FormCompletedDate_1]
+      ,[Calculated_QLQ_C30__Score_1__QL2_1]
+      ,[Calculated_QLQ_C30__Score_2__PF2_1]
+      ,[Calculated_QLQ_C30__Score_3__RF2_1]
+      ,[Calculated_QLQ_C30__Score_4__EF_1]
+      ,[Calculated_QLQ_C30__Score_5__CF_1]
+      ,[Calculated_QLQ_C30__Score_6__SF_1]
+      ,[Calculated_QLQ_C30__Score_7__FA_1]
+      ,[Calculated_QLQ_C30__Score_8__NV_1]
+      ,[Calculated_QLQ_C30__Score_9__PA_1]
+      ,[Calculated_QLQ_C30__Score_10__DY_1]
+      ,[Calculated_QLQ_C30__Score_11__SL_1]
+      ,[Calculated_QLQ_C30__Score_12__AP_1]
+      ,[Calculated_QLQ_C30__Score_13__CO_1]
+      ,[Calculated_QLQ_C30__Score_14__DI_1]
+      ,[Calculated_QLQ_C30__Score_15__FI_1]
+      ,qlq.[FormCompletedDate_2]
+      ,[Calculated_QLQ_C30__Score_1__QL2_2]
+      ,[Calculated_QLQ_C30__Score_2__PF2_2]
+      ,[Calculated_QLQ_C30__Score_3__RF2_2]
+      ,[Calculated_QLQ_C30__Score_4__EF_2]
+      ,[Calculated_QLQ_C30__Score_5__CF_2]
+      ,[Calculated_QLQ_C30__Score_6__SF_2]
+      ,[Calculated_QLQ_C30__Score_7__FA_2]
+      ,[Calculated_QLQ_C30__Score_8__NV_2]
+      ,[Calculated_QLQ_C30__Score_9__PA_2]
+      ,[Calculated_QLQ_C30__Score_10__DY_2]
+      ,[Calculated_QLQ_C30__Score_11__SL_2]
+      ,[Calculated_QLQ_C30__Score_12__AP_2]
+      ,[Calculated_QLQ_C30__Score_13__CO_2]
+      ,[Calculated_QLQ_C30__Score_14__DI_2]
+      ,[Calculated_QLQ_C30__Score_15__FI_2]
+      ,qlq.[FormCompletedDate_3]
+      ,[Calculated_QLQ_C30__Score_1__QL2_3]
+      ,[Calculated_QLQ_C30__Score_2__PF2_3]
+      ,[Calculated_QLQ_C30__Score_3__RF2_3]
+      ,[Calculated_QLQ_C30__Score_4__EF_3]
+      ,[Calculated_QLQ_C30__Score_5__CF_3]
+      ,[Calculated_QLQ_C30__Score_6__SF_3]
+      ,[Calculated_QLQ_C30__Score_7__FA_3]
+      ,[Calculated_QLQ_C30__Score_8__NV_3]
+      ,[Calculated_QLQ_C30__Score_9__PA_3]
+      ,[Calculated_QLQ_C30__Score_10__DY_3]
+      ,[Calculated_QLQ_C30__Score_11__SL_3]
+      ,[Calculated_QLQ_C30__Score_12__AP_3]
+      ,[Calculated_QLQ_C30__Score_13__CO_3]
+      ,[Calculated_QLQ_C30__Score_14__DI_3]
+      ,[Calculated_QLQ_C30__Score_15__FI_3]
+      ,qlq.[FormCompletedDate_4]
+      ,[Calculated_QLQ_C30__Score_1__QL2_4]
+      ,[Calculated_QLQ_C30__Score_2__PF2_4]
+      ,[Calculated_QLQ_C30__Score_3__RF2_4]
+      ,[Calculated_QLQ_C30__Score_4__EF_4]
+      ,[Calculated_QLQ_C30__Score_5__CF_4]
+      ,[Calculated_QLQ_C30__Score_6__SF_4]
+      ,[Calculated_QLQ_C30__Score_7__FA_4]
+      ,[Calculated_QLQ_C30__Score_8__NV_4]
+      ,[Calculated_QLQ_C30__Score_9__PA_4]
+      ,[Calculated_QLQ_C30__Score_10__DY_4]
+      ,[Calculated_QLQ_C30__Score_11__SL_4]
+      ,[Calculated_QLQ_C30__Score_12__AP_4]
+      ,[Calculated_QLQ_C30__Score_13__CO_4]
+      ,[Calculated_QLQ_C30__Score_14__DI_4]
+      ,[Calculated_QLQ_C30__Score_15__FI_4]
+      ,qlq.[FormCompletedDate_5]
+      ,[Calculated_QLQ_C30__Score_1__QL2_5]
+      ,[Calculated_QLQ_C30__Score_2__PF2_5]
+      ,[Calculated_QLQ_C30__Score_3__RF2_5]
+      ,[Calculated_QLQ_C30__Score_4__EF_5]
+      ,[Calculated_QLQ_C30__Score_5__CF_5]
+      ,[Calculated_QLQ_C30__Score_6__SF_5]
+      ,[Calculated_QLQ_C30__Score_7__FA_5]
+      ,[Calculated_QLQ_C30__Score_8__NV_5]
+      ,[Calculated_QLQ_C30__Score_9__PA_5]
+      ,[Calculated_QLQ_C30__Score_10__DY_5]
+      ,[Calculated_QLQ_C30__Score_11__SL_5]
+      ,[Calculated_QLQ_C30__Score_12__AP_5]
+      ,[Calculated_QLQ_C30__Score_13__CO_5]
+      ,[Calculated_QLQ_C30__Score_14__DI_5]
+      ,[Calculated_QLQ_C30__Score_15__FI_5]
+      ,qlq.[FormCompletedDate_6]
+      ,[Calculated_QLQ_C30__Score_1__QL2_6]
+      ,[Calculated_QLQ_C30__Score_2__PF2_6]
+      ,[Calculated_QLQ_C30__Score_3__RF2_6]
+      ,[Calculated_QLQ_C30__Score_4__EF_6]
+      ,[Calculated_QLQ_C30__Score_5__CF_6]
+      ,[Calculated_QLQ_C30__Score_6__SF_6]
+      ,[Calculated_QLQ_C30__Score_7__FA_6]
+      ,[Calculated_QLQ_C30__Score_8__NV_6]
+      ,[Calculated_QLQ_C30__Score_9__PA_6]
+      ,[Calculated_QLQ_C30__Score_10__DY_6]
+      ,[Calculated_QLQ_C30__Score_11__SL_6]
+      ,[Calculated_QLQ_C30__Score_12__AP_6]
+      ,[Calculated_QLQ_C30__Score_13__CO_6]
+      ,[Calculated_QLQ_C30__Score_14__DI_6]
+      ,[Calculated_QLQ_C30__Score_15__FI_6]
+      ,qlq.[FormCompletedDate_7]
+      ,[Calculated_QLQ_C30__Score_1__QL2_7]
+      ,[Calculated_QLQ_C30__Score_2__PF2_7]
+      ,[Calculated_QLQ_C30__Score_3__RF2_7]
+      ,[Calculated_QLQ_C30__Score_4__EF_7]
+      ,[Calculated_QLQ_C30__Score_5__CF_7]
+      ,[Calculated_QLQ_C30__Score_6__SF_7]
+      ,[Calculated_QLQ_C30__Score_7__FA_7]
+      ,[Calculated_QLQ_C30__Score_8__NV_7]
+      ,[Calculated_QLQ_C30__Score_9__PA_7]
+      ,[Calculated_QLQ_C30__Score_10__DY_7]
+      ,[Calculated_QLQ_C30__Score_11__SL_7]
+      ,[Calculated_QLQ_C30__Score_12__AP_7]
+      ,[Calculated_QLQ_C30__Score_13__CO_7]
+      ,[Calculated_QLQ_C30__Score_14__DI_7]
+      ,[Calculated_QLQ_C30__Score_15__FI_7]
+      ,qlq.[FormCompletedDate_8]
+      ,[Calculated_QLQ_C30__Score_1__QL2_8]
+      ,[Calculated_QLQ_C30__Score_2__PF2_8]
+      ,[Calculated_QLQ_C30__Score_3__RF2_8]
+      ,[Calculated_QLQ_C30__Score_4__EF_8]
+      ,[Calculated_QLQ_C30__Score_5__CF_8]
+      ,[Calculated_QLQ_C30__Score_6__SF_8]
+      ,[Calculated_QLQ_C30__Score_7__FA_8]
+      ,[Calculated_QLQ_C30__Score_8__NV_8]
+      ,[Calculated_QLQ_C30__Score_9__PA_8]
+      ,[Calculated_QLQ_C30__Score_10__DY_8]
+      ,[Calculated_QLQ_C30__Score_11__SL_8]
+      ,[Calculated_QLQ_C30__Score_12__AP_8]
+      ,[Calculated_QLQ_C30__Score_13__CO_8]
+      ,[Calculated_QLQ_C30__Score_14__DI_8]
+      ,[Calculated_QLQ_C30__Score_15__FI_8]
+	  ,bloodgrp.BloodGroup
+	  ,fbc.[HB_DxResultDate]
+      ,fbc.[HB_DxResultValue]
+      ,fbc.[HB_FirstVisitResultDate]
+      ,fbc.[HB_FirstVisitResultValue]
+      ,fbc.[HB_RTStartResultDate]
+      ,fbc.[HB_RTStartResultValue]
+      ,fbc.[HB_RTEndResultDate]
+      ,fbc.[HB_RTEndResultValue]
+      ,fbc.[MCV_DxResultDate]
+      ,fbc.[MCV_DxResultValue]
+      ,fbc.[MCV_FirstVisitResultDate]
+      ,fbc.[MCV_FirstVisitResultValue]
+      ,fbc.[MCV_RTStartResultDate]
+      ,fbc.[MCV_RTStartResultValue]
+      ,fbc.[MCV_RTEndResultDate]
+      ,fbc.[MCV_RTEndResultValue]
+      ,fbc.[WBC_DxResultDate]
+      ,fbc.[WBC_DxResultValue]
+      ,fbc.[WBC_FirstVisitResultDate]
+      ,fbc.[WBC_FirstVisitResultValue]
+      ,fbc.[WBC_RTStartResultDate]
+      ,fbc.[WBC_RTStartResultValue]
+      ,fbc.[WBC_RTEndResultDate]
+      ,fbc.[WBC_RTEndResultValue]
+      ,fbc.[Neutrophils_DxResultDate]
+      ,fbc.[Neutrophils_DxResultValue]
+      ,fbc.[Neutrophils_FirstVisitResultDate]
+      ,fbc.[Neutrophils_FirstVisitResultValue]
+      ,fbc.[Neutrophils_RTStartResultDate]
+      ,fbc.[Neutrophils_RTStartResultValue]
+      ,fbc.[Neutrophils_RTEndResultDate]
+      ,fbc.[Neutrophils_RTEndResultValue]
+      ,fbc.[Lymphocytes_DxResultDate]
+      ,fbc.[Lymphocytes_DxResultValue]
+      ,fbc.[Lymphocytes_FirstVisitResultDate]
+      ,fbc.[Lymphocytes_FirstVisitResultValue]
+      ,fbc.[Lymphocytes_RTStartResultDate]
+      ,fbc.[Lymphocytes_RTStartResultValue]
+      ,fbc.[Lymphocytes_RTEndResultDate]
+      ,fbc.[Lymphocytes_RTEndResultValue]
+      ,fbc.[Platelets_DxResultDate]
+      ,fbc.[Platelets_DxResultValue]
+      ,fbc.[Platelets_FirstVisitResultDate]
+      ,fbc.[Platelets_FirstVisitResultValue]
+      ,fbc.[Platelets_RTStartResultDate]
+      ,fbc.[Platelets_RTStartResultValue]
+      ,fbc.[Platelets_RTEndResultDate]
+      ,fbc.[Platelets_RTEndResultValue]
+	  ,biochem.[albDxResultDate]
+      ,biochem.[albDxResultValue]
+      ,biochem.[albFirstVisitResultDate]
+      ,biochem.[albFirstVisitResultValue]
+      ,biochem.[albRTStartResultDate]
+      ,biochem.[albRTStartResultValue]
+      ,biochem.[albRTEndResultDate]
+      ,biochem.[albRTEndResultValue]
+      ,biochem.[ALP_DxResultDate]
+      ,biochem.[ALP_DxResultValue]
+      ,biochem.[ALP_FirstVisitResultDate]
+      ,biochem.[ALP_FirstVisitResultValue]
+      ,biochem.[ALP_RTStartResultDate]
+      ,biochem.[ALP_RTStartResultValue]
+      ,biochem.[ALP_RTEndResultDate]
+      ,biochem.[ALP_RTEndResultValue]
+      ,biochem.[ALT_DxResultDate]
+      ,biochem.[ALT_DxResultValue]
+      ,biochem.[ALT_FirstVisitResultDate]
+      ,biochem.[ALT_FirstVisitResultValue]
+      ,biochem.[ALT_RTStartResultDate]
+      ,biochem.[ALT_RTStartResultValue]
+      ,biochem.[ALT_RTEndResultDate]
+      ,biochem.[ALT_RTEndResultValue]
+      ,biochem.[Bili_DxResultDate]
+      ,biochem.[Bili_DxResultValue]
+      ,biochem.[Bili_FirstVisitResultDate]
+      ,biochem.[Bili_FirstVisitResultValue]
+      ,biochem.[Bili_RTStartResultDate]
+      ,biochem.[Bili_RTStartResultValue]
+      ,biochem.[Bili_RTEndResultDate]
+      ,biochem.[Bili_RTEndResultValue]
+      ,biochem.[Ca_DxResultDate]
+      ,biochem.[Ca_DxResultValue]
+      ,biochem.[Ca_FirstVisitResultDate]
+      ,biochem.[Ca_FirstVisitResultValue]
+      ,biochem.[Ca_RTStartResultDate]
+      ,biochem.[Ca_RTStartResultValue]
+      ,biochem.[Ca_RTEndResultDate]
+      ,biochem.[Ca_RTEndResultValue]
+      ,biochem.[Cr_DxResultDate]
+      ,biochem.[Cr_DxResultValue]
+      ,biochem.[Cr_FirstVisitResultDate]
+      ,biochem.[Cr_FirstVisitResultValue]
+      ,biochem.[Cr_RTStartResultDate]
+      ,biochem.[Cr_RTStartResultValue]
+      ,biochem.[Cr_RTEndResultDate]
+      ,biochem.[Cr_RTEndResultValue]
+
+	   FROM [AICentre].[RTHN].[CohortUploadBASE] AS cohort
+  LEFT JOIN [AICentre].[RTHN].[CogStackComorbiditiesBASE] AS cogstack ON cogstack.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].HNListUpdatedBASE AS hnlist ON hnlist.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[FUDeathDataBASE] AS followup ON followup.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[AlcoholStatusDataBASE] AS alcostatus ON alcostatus.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[AlcoholAmountDataBASE] AS alcoamount ON alcoamount.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[SmokingStatusDataBASE] AS smokestatus ON smokestatus.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[SmokingAmountDataBASE] AS smokeamount ON smokeamount.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[OtherCancerDxBASE] AS otherca ON otherca.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[ECOGPSDataBASE] AS ecogps ON ecogps.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].AmalgamatedGTDiagnosisBASE AS diaghisto ON diaghisto.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[RTTreatmentDataBASE] AS rttreatment ON rttreatment.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.BaselineToxicityDataBASE AS baselinetox ON baselinetox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk1RTToxicityDataBASE AS onewktox ON onewktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk2RTToxicityDataBASE AS twowktox ON twowktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk3RTToxicityDataBASE AS threewktox ON threewktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk4RTToxicityDataBASE AS fourwktox ON fourwktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk5RTToxicityDataBASE AS fivewktox ON fivewktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.Wk6RTToxicityDataBASE AS sixwktox ON sixwktox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.[1wkPostRTToxicityDataBASE] AS onewkposttox ON onewkposttox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.[2wkPostRTToxicityDataBASE] AS twowkposttox ON twowkposttox.HospitalID = cohort.HospitalID
+LEFT JOIN AICentre.RTHN.[6wkPostRTToxicityDataBASE] AS sixwkposttox ON sixwkposttox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[3mPostRTToxicityDataBASE] AS threemtox ON threemtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[6mPostRTToxicityDataBASE] AS sixmtox ON sixmtox.HospitalID = cohort.HospitalID
+    LEFT JOIN AICentre.RTHN.[9mPostRTToxicityDataBASE] AS ninemtox ON ninemtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[1yrPostRTToxicityDataBASE] AS oneyrtox ON oneyrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[2yrPostRTToxicityDataBASE] AS twoyrtox ON twoyrtox.HospitalID = cohort.HospitalID
+    LEFT JOIN AICentre.RTHN.[3yrPostRTToxicityDataBASE] AS threeyrtox ON threeyrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[4yrPostRTToxicityDataBASE] AS fouryrtox ON fouryrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[5yrPostRTToxicityDataBASE] AS fiveyrtox ON fiveyrtox.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.[5yrAndLaterPostRTToxicityDataBASE] AS fiveyrtoxplus ON fiveyrtoxplus.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.MDMDataPivotedBASE AS mdm ON mdm.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.EORTC43DataPivotedBASE AS eortc ON eortc.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[QLQC30DataPivotedBASE] AS qlq ON qlq.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HNBSADataBASE AS bsa ON bsa.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[FBCDataBASE] AS fbc ON fbc.HospitalID = cohort.HospitalID
+  LEFT JOIN [AICentre].[RTHN].[BiochemistryBASE] AS biochem ON biochem.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.BloodGroupDataBASE AS bloodgrp ON bloodgrp.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HNFirstTreatmentIntentBASE AS hnrxintent ON hnrxintent.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HNFirstTreatmentPlanBASE AS hnrxplan ON hnrxplan.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.OtherCogStackDataPointsBASE AS othercogstack ON othercogstack.Hospital_ID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.HeightDataBASE AS  height ON height.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.InitialWeightDataBASE AS weight ON weight.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.FirstTreatmentDataBASE AS firstrx ON firstrx.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.AllChemoDataCombinedBASE AS chemodata ON chemodata.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.RTTargetVolFormsBASE AS targetvols ON targetvols.Hospital_Number = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.AllProcedureDataBASE AS procedures ON procedures.HospitalID = cohort.HospitalID
+  LEFT JOIN AICentre.RTHN.PostCodeDeprivationDataBASE AS pcodedata ON pcodedata.Postcode = cohort.PostCD
+
+  ORDER BY cohort.HospitalID
