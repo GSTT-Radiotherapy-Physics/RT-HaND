@@ -30,39 +30,36 @@ RT-HaND Staff ...
 Researchers ...
 
 ## Overview
+
 ## Publications
 https://www.medrxiv.org/content/10.1101/2025.02.12.25322092v1
 https://www.thegreenjournal.com/article/S0167-8140(24)02911-6/abstract
 
 ## Resources
-Links to SOPs
+[XNAT Ingestion from PACS](Documentation/SOPs/SOP-PACS-Ingestion.md)
 
 ## Roadmap
-Going forward
+
 ## Acknowledgements
+_Last updated: 11/11/2024_
+### Names to be included for publications/acknowledgements for researchers using the clinical dataset:
 
-RT-HaND_C Retrospective Dataset Build SOP Appendix 3: Acknowledgements
-
-Last updated: 11/11/2024
-
-Names to be included for publications/acknowledgements for researchers using the clinical dataset:
-
-Any data:
+**Any data:**
 Teresa Guerrero Urbano, Tom Young, Victoria Butterworth, Eleanor Ivy, Haleema Drake, Dika Vilic, Delali Adjogatse, Imran Petkar, Mary Lei, Anthony Kong, Miguel Reis-Ferreira
 
-RT imaging data:
+**RT imaging data:**
 Isabel Palmer, Tania Avgoulea, Josh Andriolo, Carole Creppy and Corla Routledge
 
-PD-L1 data:
+**PD-L1 data:**
 Lisette Collins
 
-Oropharynx data:
+**Oropharynx data:**
 Francesca de Felice, Tom Bird
 
-Oral Cavity data:
+**Oral Cavity data:**
 Khrishanthne Sambasivan
 
-Acknowledgements:
+### Acknowledgements:
 
 We would like to extend our gratitude to the patients whose data facilitated this evaluative study. We would like to acknowledge the Topol Fellowship Funding from NHS Digital, which helped fund this project. This work was supported by the Radiation Research Unit at the Cancer Research UK City of London Centre Award [C7893/A28990] and by Wilson + Olegario Philanthropy.
 
