@@ -1,6 +1,30 @@
-# Ingesting from ARIA
+# RT DICOM Ingestion from ARIA
 
-To update the lake for previous retrospective patients, Aria should be queried for all studies. The studies should then be named according to RT-HaND-013 Transfer of Radiotherapy Data SOP and ingested into XNAT.
+The XNAT data lake will be updated with radiotherapy DICOM data on a 3-monthly basis for two streams of ingestion:
+
+1. Ingestion of data for new patients
+2. Ongoing ingestion of data for existing patients
+
+Ingestion for both streams will follow a similar process:
+
+### Step 1. Query ARIA for associated studies
+To update the XNAT repository, ARIA should be queried for studies associated with each patient ID.
+- For new patients, ARIA should be queried for ALL studies
+- For ongoing ingestion, ARIA should be queried for studies within a specified date range (e.g. 3 month date range, since the previous ingestion)
+
+Collation of patient lists will be carried out by the project administrator and provided to the CSC team.  The CSC team will return to the administrator the following fields for available data in ARIA:
+
+| patientId| studyInstanceUID | studyId| accessionNumber| studyDate| studyDescription|
+|-|-|-|-|-|-|
+
+Most of the contents of this table will be images- typically CT scans to which other DICOM objects are attached, or other pre-treatment imaging such as MRI or PET-CT scans.  The non-RT-planning-CT images tend to have accession numbers associated with them, whereas the RT planning CT studies do not.
+
+### Step 2. Remove Irrelevant Studies
+Some of the studies found in the ARIA query will not need to be ingested into XNAT.  Irrelevant studies mostly consist of 
+
+### Step 3. Assign Study Descriptions
+For the above table, the StudyDescription field will be blank
+
 
 In the ingestion of the retrospective cohort most patients were treated in Mosaiq and so details on their prescription, completed fractions and radiotherapy start and end dates were taken from EDW and stored within RT-HaND_C in EDW as this is treatment information. The patients treated through Aria had this data manually compiled.
 
