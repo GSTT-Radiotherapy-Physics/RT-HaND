@@ -20,7 +20,7 @@ Collation of patient lists will be carried out by the project administrator and 
 
 The studies listed in this table will most likely consist of radiotherapy planning CT scans to which other DICOM objects are attached, and other pre-treatment imaging such as MRI and PET-CT scans.  There may also be studies such as orthovoltage and electron treatments.  The radiotherapy planning CT scans do not have accession numbers associated with them, whereas other imaging studies do.
 
-### Step 2. Remove Irrelevant Studies
+### Step 2. Remove Unwanted Studies
 Some of the studies found in the ARIA query will not need to be ingested into XNAT, including verification studies.  Attempting to ingest verification studies causes complications in the ingestion process.  Therefore, these studies should be removed by searching for any Study Instance UIDs which start with the following sequence and removing these entries:
 
 |Study Instance UID prefixes for verification plans|
@@ -68,12 +68,10 @@ Once all studies have been labelled, the table should be checked to ensure there
 ### Step 4. Associate ARIA MRN with NHS ID
 Data pulled from ARIA will only be associated with the ARIA MRN, whereas the XNAT data lake is identified through NHS ID.  In order to ingest from ARIA, studies must be linked to an NHS ID.  An additional column must be added to the table.  A VLOOKUP formula can be used alongside the master patient list to complete this column. 
 
-Finally, the sheet should be sent to the CSC team as a .csv file.
+### Step 5. Send to CSC Team for Ingestion
+The table should be saved in .csv format and sent to the CSC team for ingestion into XNAT.
 
-### Step 5. Manage Failed Ingestions
-Following ingestion of the studies into XNAT, there may be some failures. These will need to be assessed on a case-by-case basis.  Possible methods of dealing with failures are to attempt re-ingestion 
+### Step 6. Manage Failed Ingestions
+Following ingestion of the studies into XNAT, there may be some failures. These will need to be assessed on a case-by-case basis.  Unresolved failed ingestions must be recorded for future reference.
 
-****CONTINUE HERE******
-
-XNAT ingests all available files attached to an imaging session in Aria. This means that all CBCTs for post-Aria patients are attached to the imaging session containing the original planning CT, structure set and dose cube (likely to be the things most of interest to a researcher). This means careful selection of data must take place when giving data to researchers. This is covered in the downloading data from XNAT SOP.
-A .csv file detailing the radiotherapy information retrieved and expected in XNAT was produced, this is attached to the RT-HaND_I data lake as a .csv file in XNAT, this also features the descriptions of how many fractions patients received on each plan in the event of replans and any known errors in data retrieval.  
+### Step 7. Update Data Availability Document
