@@ -34,7 +34,7 @@ https://www.medrxiv.org/content/10.1101/2025.02.12.25322092v1
 https://www.thegreenjournal.com/article/S0167-8140(24)02911-6/abstract
 
 ## Roadmap
-RT-HaND currently holds data for 2895 patients, collected between 01/01/2010 and 04/10/2023.  The switchover to a new patient information system, EPIC, and the move from Mosaiq to a different oncology information system (ARIA), present new hurdles which have slowed the growth of the data lake.  
+RT-HaND currently holds data for 2895 patients, collected between 01/01/2010 and 04/10/2023.  The switchover to a new patient information system (EPIC) and the move from Mosaiq to a different oncology information system (ARIA), present new hurdles which have slowed the growth of the data lake.  
 
 The current priorities of the project are to create direct links between the EDW database and both EPIC and AURA (the ARIA database).
 
