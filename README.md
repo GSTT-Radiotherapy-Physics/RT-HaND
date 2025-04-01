@@ -1,15 +1,13 @@
 ## Table of Contents
 1. [Introduction](#introduction)
 2. [Team Members](#team%20members)
-3. [Getting Started](#getting%20started)
-4. [Overview](#overview)
-5. [Publications](#publications)
-6. [Resources](#resources)
-7. [Roadmap](#roadmap)
-8. [Acknowledgements](#acknowledgements)
+3. [Documents](#Documents)
+4. [Publications](#publications)
+6. [Roadmap](#roadmap)
+7. [Acknowledgements](#acknowledgements)
 
 ## Introduction
-RT-HaND is a large clinically annotated imaging data lake of Head and Neck Cancer patients.  
+RT-HaND is a large, clinically annotated imaging data lake of Head and Neck Cancer patients.  
 
 The complete HNC data lake (RT-HaND) is composed of the XNAT data lake (RT-HaND_I) (containing imaging and radiotherapy DICOM data) plus a set of (currently) 157 tables in EDW (Enterprise Data Warehouse) (RT-HaND_C) which contain over 7 million clinical data points.
 
@@ -23,22 +21,17 @@ XNAT is an open-source software that enables ingestion, storage, anonymisation a
 **Oncology:** Tom Young  
 **Clinical Scientific Computing:** Dijana Vilic & Haleema Drake  
 
-Include contact details?
-
-## Getting Started
-RT-HaND Staff ...  
-Researchers ...
-
-## Overview
+## Documents
+[XNAT Ingestion from PACS](Documentation/SOPs/SOP-PACS-Ingestion.md)
 
 ## Publications
 https://www.medrxiv.org/content/10.1101/2025.02.12.25322092v1
 https://www.thegreenjournal.com/article/S0167-8140(24)02911-6/abstract
 
-## Resources
-[XNAT Ingestion from PACS](Documentation/SOPs/SOP-PACS-Ingestion.md)
-
 ## Roadmap
+current status
+need to link up databases
+plan is to update on a 3-monthly basis, incorporating new patients and 
 
 ## Acknowledgements
 _Last updated: 11/11/2024_
