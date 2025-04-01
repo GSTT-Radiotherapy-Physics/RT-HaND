@@ -20,7 +20,9 @@ Collation of patient lists will be carried out by the project administrator and 
 |-                |-           |-          |-                 |-         |
 
 ### Step 2. Remove Unwanted Studies
-Only studies related to the diagnosis, staging, progression or ongoing monitoring of treatment side effects of HNC should be ingested into XNAT.  The study description column should be filtered to only include these scans.  A list of known study descriptions to include and exclude is saved in the [appendix](Documentation/Appendix/).
+Only studies related to the diagnosis, staging, progression or ongoing monitoring of treatment side effects of HNC should be ingested into XNAT.  The study description column should be filtered to only include these scans.  A list of known study descriptions to include and exclude is saved in the.
+
+[XNAT Ingestion from PACS](Documentation/SOPs/SOP-PACS-Ingestion.md)
 
  This included all staging FDG nuclear medicine scans (NM), all staging (e.g. CT chest/abdomen and pelvis) and relevant anatomy (head and neck area) CTs and MRIs and all dental x-ray (XR) and video fluoroscopy (VF) studies. Unspecified CTs were inspected and included if relevant. A brief summary is shown in Appendix 1. The data flow diagram for this process is shown below.
 
