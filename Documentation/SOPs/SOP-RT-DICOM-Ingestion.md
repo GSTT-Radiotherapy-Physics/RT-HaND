@@ -18,7 +18,7 @@ Collation of patient lists will be carried out by the project administrator and 
 | patientId| studyInstanceUID | studyId| accessionNumber| studyDate| studyDescription|
 |-         |-                 |-       |-               |-         |-                |
 
-The studies listed in this table will most likely consist of radiotherapy planning CT scans to which other DICOM objects are attached, and other pre-treatment imaging such as MRI and PET-CT scans.  There may also be studies such as orthovoltage and electron treatments.  The radiotherapy planning CT scans do not have accession numbers associated with them, whereas other imaging studies do.
+The studies listed in this table will most likely consist of radiotherapy planning CT scans to which other DICOM objects are attached (treatment plan, structure set, dose cube, registered images), and other pre-treatment imaging such as MRI and PET-CT scans.  There may also be studies such as orthovoltage and electron treatments.  The radiotherapy planning CT scans do not have accession numbers associated with them, whereas other imaging studies do.
 
 ### Step 2. Remove Unwanted Studies
 Some of the studies found in the ARIA query will not need to be ingested into XNAT, including verification studies.  Attempting to ingest verification studies causes complications in the ingestion process.  Therefore, these studies should be removed by searching for any Study Instance UIDs which start with the following sequence and removing these entries:
