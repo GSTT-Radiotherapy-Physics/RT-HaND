@@ -1,13 +1,30 @@
-# Updating from PACS
+# DICOM Ingestion from PACS
 
-## Introduction
-Diagnostic and follow-up imaging for Head and Neck Cancer patients available up until the implementation of EPIC (4th October 2023) were ingested into XNAT. Only scans considered pertinent by H&N clinicians to the diagnosis, staging, treatment and follow-up of head and neck cancer patients were ingested, a summary can be seen in Appendix 1 or the full inclusion/exclusion criteria are in document 12a RT-HaND_I Imaging Study Descriptions, known Include vs Exclude.
+The XNAT data lake will be updated with radiotherapy DICOM data on a 3-monthly basis for two streams of ingestion:
 
-As of 4/10/23 (the date to which the retrospective cohort data is up-to-date currently), around 50% of patients in the cohort were still alive. Future imaging data for these patients will also therefore require curation, ingestion and storage within RT-HaND_I in XNAT. This can include further imaging from PACS or Radiotherapy Treatment from Aria. The same methodologies as the initial ingestions of these patients data can mostly be employed and are detailed below. 
+- Ingestion of data for new patients
+- Ongoing ingestion of data for existing patients
 
-## Background
+Ingestion for both streams will follow a similar process:
 
-PACS (Sectra) was queried for the study descriptions and accession numbers of all diagnostic imaging sessions contained for each patient. The resultant study descriptions returned were used to filter the accession numbers to enable the selection of the imaging sessions to ensure only relevant data was ingested using the REST-API into the data lake. Study descriptions considered relevant were any orders pertinent to the diagnosis, staging, progression or ongoing monitoring of treatment side effects of HNC. This included all staging FDG nuclear medicine scans (NM), all staging (e.g. CT chest/abdomen and pelvis) and relevant anatomy (head and neck area) CTs and MRIs and all dental x-ray (XR) and video fluoroscopy (VF) studies. Unspecified CTs were inspected and included if relevant. A brief summary is shown in Appendix 1. The data flow diagram for this process is shown below.
+### Step 1. Query PACS for associated studies
+
+To update the XNAT repository, PACS should be queried for studies associated with each patient ID.
+
+- For new patients, PACS should be queried for ALL studies
+- For ongoing ingestion, PACS should be queried for studies within a specified date range (e.g. 3 month date range, since the previous ingestion)
+
+Collation of patient lists will be carried out by the project administrator and provided to the CSC team. The CSC team will return to the administrator the following fields for available data in PACS:
+
+| Accession Number| Patient ID | Study Date| Study Description| Study UID|
+|-                |-           |-          |-                 |-         |
+
+### Step 2. Remove Unwanted Studies
+Only studies related to the diagnosis, staging, progression or ongoing monitoring of treatment side effects of HNC should be ingested into XNAT.  The study description column should be filtered to only include these scans.  A list of known study descriptions to include and exclude is saved 
+
+[here](Documentation/Appendix/12a_RT-HaND_I_Imaging_Study_Descriptions-Known_Include_Exclude.xlsx)
+
+ This included all staging FDG nuclear medicine scans (NM), all staging (e.g. CT chest/abdomen and pelvis) and relevant anatomy (head and neck area) CTs and MRIs and all dental x-ray (XR) and video fluoroscopy (VF) studies. Unspecified CTs were inspected and included if relevant. A brief summary is shown in Appendix 1. The data flow diagram for this process is shown below.
 
 ![image](https://github.com/user-attachments/assets/99eb20de-3294-436c-a6e1-f7d51c409e12)
 
