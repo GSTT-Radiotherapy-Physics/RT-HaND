@@ -18,7 +18,7 @@ XNAT is an open-source software that enables ingestion, storage, anonymisation a
 ## Team Members
 **Project Lead:** Teresa Guerrero Urbano  
 **Radiotherapy Physics:** Eleanor Ivy & Victoria Butterworth  
-**Oncology:** Tom Young & Wahyu Wulaningsih
+**Oncology:** Tom Young & Wahyu Wulaningsih 
 **Clinical Scientific Computing:** Dijana Vilic, Haleema Drake, Molly Buckley & Keri Anderson
 
 ## Files
