@@ -18,8 +18,8 @@ XNAT is an open-source software that enables ingestion, storage, anonymisation a
 ## Team Members
 **Project Lead:** Teresa Guerrero Urbano  
 **Radiotherapy Physics:** Eleanor Ivy & Victoria Butterworth  
-**Oncology:** Tom Young  
-**Clinical Scientific Computing:** Dijana Vilic & Haleema Drake  
+**Oncology:** Tom Young & Wahyu Wulaningsih
+**Clinical Scientific Computing:** Dijana Vilic, Haleema Drake, Molly Buckley & Keri Anderson
 
 ## Files
 Documentation relating to the creation of RT-HaND (up until to December 2024) can be found under [Reference Docs](Documentation/Reference%20Docs).
