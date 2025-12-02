@@ -29,7 +29,9 @@ Useful scripts are stored in [Scripts](Scripts)
 SOPs for ongoing ingestion into RT-HaND are found under [SOPs](Documentation/SOPs) 
 
 ## Publications
-https://www.medrxiv.org/content/10.1101/2025.02.12.25322092v1
+Butterworth V, Young T, Drake H, Palmer I, Avgoulea T, Ivy E, et al. Data-centric artificial intelligence and cancer research: construction of a real-world head and neck treatment data repository. ESMO Real World Data and Digital Oncology. 2025 Sep;9:100162. https://doi.org/10.1016/j.esmorw.2025.100162
+
+Young T, Drake H, Butterworth V, Wulaningsih W, Dann B, Giemza A, et al. RT-HaND_C: A Multi-Source, Validated Real-world Head and Neck Cancer Dataset for Research. Clin Oncol. 2025 Nov;47:103935. https://doi.org/10.1016/j.clon.2025.103935
 
 https://www.thegreenjournal.com/article/S0167-8140(24)02911-6/abstract
 
@@ -43,11 +45,11 @@ Alongside this work, XNAT will be updated on a quarterly basis with imaging DICO
 Work to smooth out the process of distributing anonymised data to prospective researchers is in progress.
 
 ## Acknowledgements
-_Last updated: 11/11/2024_
+_Last updated: 02/12/2025_
 ### Names to be included for publications/acknowledgements for researchers using the clinical dataset:
 
 **Any data:**
-Teresa Guerrero Urbano, Tom Young, Victoria Butterworth, Eleanor Ivy, Haleema Drake, Dika Vilic, Delali Adjogatse, Imran Petkar, Mary Lei, Anthony Kong, Miguel Reis-Ferreira
+Teresa Guerrero Urbano, Tom Young, Victoria Butterworth, Wahyu Wulaningsih, Eleanor Ivy, Haleema Drake, Dika Vilic, Delali Adjogatse, Imran Petkar, Mary Lei, Anthony Kong, Miguel Reis Ferreira
 
 **RT imaging data:**
 Isabel Palmer, Tania Avgoulea, Josh Andriolo, Carole Creppy and Corla Routledge
